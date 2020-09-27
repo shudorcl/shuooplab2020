@@ -23,3 +23,4 @@ public:
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
+//sunyiyan.change
