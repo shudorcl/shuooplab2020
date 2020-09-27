@@ -11,7 +11,7 @@ public:
     String(int n, char c);
     String(const String &Str);
     String(const String &Str, int pos, int n);
-    ~String() {}
+    ~String() {}//
     //String Function
     int length() const;
     int find(const String &Str) const;
