@@ -9,16 +9,16 @@ public:
     String(const char *s = "");
     String(const char *s, int n);
     String(int n, char c);
-    String(const String &str);
-    String(const String &str, int pos, int n);
+    String(const String &Str);
+    String(const String &Str, int pos, int n);
     ~String() {}
     //String Function
     int length() const;
-    int find(const String &str) const;
-    void swap(String &str);
-    void reverse(String &str);
-    void uppercase(String &str);
-    void lowercase(String &str);
-    void copy(const String &str) const;
+    int find(const String &Str) const;
+    void swap(String &Str);
+    void reverse(String &Str);
+    void uppercase(String &Str);
+    void lowercase(String &Str);
+    void copy(const String &Str) const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
