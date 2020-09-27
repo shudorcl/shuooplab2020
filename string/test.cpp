@@ -4,8 +4,11 @@ using namespace std;
 
 int main()
 {
-    String test("Ark"), str;
+    int n;
+    String test("Ark"), str,stra("Kamen Rider Ark One");
     str.copy(test);
-    cout << "Wait...";
+    n=stra.find(test);
+    cout << "Wait...\n"
+         <<"n="<<n<<endl;
     return 0;
 }

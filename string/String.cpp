@@ -10,7 +10,28 @@ String::String(const char *s)
 }
 int String::find(const String &Str) const
 {
-    int i;
+    int i, j, m, n, flag;
+    m = strlen(Str.str);
+    n = strlen(str);
+    if (m > n)
+        return -1;
+    for (i = 0; i < n - m; i++)
+    {
+        flag = 1;
+        for (j = 0; j < m; j++)
+        {
+            if (Str.str[j] != str[i + j])
+            {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 void String::copy(const String &Str) const
 {
