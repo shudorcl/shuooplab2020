@@ -15,6 +15,7 @@ public:
     //String Function
     int length() const;
     int find(const String &Str) const;
+    int rfind(const String &Str) const;
     void swap(String &Str);
     void reverse(String &Str);
     void uppercase(String &Str);
@@ -24,3 +25,4 @@ public:
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
 //sunyiyan.change
+//haoye
