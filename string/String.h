@@ -21,6 +21,6 @@ public:
     void uppercase(String &Str);
     void lowercase(String &Str);
     void copy(const String &Str) const;
+    void ncopy(const String &Str,int n) const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
-//haoye

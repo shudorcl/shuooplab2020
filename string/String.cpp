@@ -58,3 +58,8 @@ void String::copy(const String &Str) const
 {
     strcpy(str, Str.str);
 }
+void String::ncopy(const String &Str,int n) const
+{
+    strncpy(str,Str.str,n);
+    str[n]='\0';
+}
