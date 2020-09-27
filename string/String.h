@@ -23,4 +23,6 @@ public:
     void copy(const String &Str) const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
+//xhange
+//sunyiyan.change
 //haoye
