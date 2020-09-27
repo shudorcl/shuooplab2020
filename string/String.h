@@ -13,12 +13,12 @@ public:
     String(const String &str, int pos, int n);
     ~String() {}
     //String Function
-    int String_length() const;
-    int String_find(const String &str) const;
-    void String_swap(String &str);
-    void String_reverse(String &str);
-    void String_uppercase(String &str);
-    void String_lowercase(String &str);
-    void String_copy(const String &str) const;
+    int length() const;
+    int find(const String &str) const;
+    void swap(String &str);
+    void reverse(String &str);
+    void uppercase(String &str);
+    void lowercase(String &str);
+    void copy(const String &str) const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
