@@ -5,7 +5,7 @@ RCL's Mission
 
 1. strcpy(copy) ✔
 2. strncpy✔
-3. compare (operater)
+3. compare (operater)✔
 4. strcat✔
 5. strncat✔
 6. find✔
