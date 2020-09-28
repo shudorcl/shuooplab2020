@@ -58,7 +58,11 @@ String::String(const String &Str,int pos,int n)
         str[i]=Str.str[pos+i];
     str[i]='\0';
 }
-
+String::~String()
+{
+    if(str!=NULL)
+        delete [] str;
+}
 //the defination of append
 String &String::append(const String &s)
 {
@@ -107,13 +111,9 @@ String &String::append(int pos, const char s)
 bool String::empty() const
 {
     if(str == NULL)
-    {
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 //the function of insert
@@ -132,5 +132,10 @@ String & String::insert(int p0,const char *s)
     return *this;
 }
 
-//the function of substr
 
+//the function of substr
+String String::substr(int pos,int n) const
+{
+    String temp(*this,pos,n);
+    return temp;
+}
