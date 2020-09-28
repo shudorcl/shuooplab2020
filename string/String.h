@@ -11,8 +11,8 @@ public:
     String(int n, char c);
     String(const String &Str);
     String(const String &Str, int pos, int n);
-    String & operator=(const String &Str);
-    ~String() {}//
+    String &operator=(const String &Str);
+    virtual ~String(); //
     //String Function
     int length() const;
     int find(const String &Str) const;
@@ -21,16 +21,17 @@ public:
     void reverse(String &Str);
     void uppercase(String &Str);
     void lowercase(String &Str);
-    char* & copy(const String &Str) ;
-    char* & ncopy(const String &Str,int n) ;
-    char* & catenate(const String &Str) ;
-    char* & ncatenate(const String &Str,int n) ;
+    char *&copy(const String &Str);
+    char *&ncopy(const String &Str, int n);
+    char *&catenate(const String &Str);
+    char *&ncatenate(const String &Str, int n);
     friend bool operator==(const String &Str1, const String &Str2);
     friend bool operator!=(const String &Str1, const String &Str2);
     friend bool operator>(const String &Str1, const String &Str2);
     friend bool operator>=(const String &Str1, const String &Str2);
     friend bool operator<(const String &Str1, const String &Str2);
     friend bool operator<=(const String &Str1, const String &Str2);
+    void Show() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
