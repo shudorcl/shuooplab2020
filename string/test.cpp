@@ -15,5 +15,6 @@ int main()
     str.ncopy(test, 2);
     cout << "Wait...\n"
          << endl;
+    cout <<(test==stra)<<endl;
     return 0;
 }

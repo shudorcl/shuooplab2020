@@ -43,10 +43,10 @@ String::String(const String &Str)
 String::~String()
 {
     static int a = 0;
-    if (*this != NULL)
+    if (str != NULL)
         delete[] str;
     a++;
-    cout << "Now we'll destruct MY_STRING.("
+    cout << "Now we'll destruct a String.("
          << a << ")" << endl;
 }
 int String::length() const
@@ -158,14 +158,14 @@ bool operator>=(const String &Str1, const String &Str2)
     else
         return false;
 }
-bool operator>(const String &Str1, const String &Str2)
+bool operator<(const String &Str1, const String &Str2)
 {
     if (strcmp(Str1.str, Str2.str) < 0)
         return true;
     else
         return false;
 }
-bool operator>=(const String &Str1, const String &Str2)
+bool operator<=(const String &Str1, const String &Str2)
 {
     if (strcmp(Str1.str, Str2.str) <= 0)
         return true;
