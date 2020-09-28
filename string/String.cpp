@@ -42,12 +42,14 @@ String::String(const String &Str)
 }
 String::~String()
 {
-    static int a = 0;
+    static int DestructCount = 0;
+    cout << "Now we'll destruct a String.("
+         << str << ')';
     if (str != NULL)
         delete[] str;
-    a++;
-    cout << "Now we'll destruct a String.("
-         << a << ")" << endl;
+    DestructCount++;
+
+    cout << '(' << DestructCount << ')' << endl;
 }
 int String::length() const
 {
@@ -171,4 +173,8 @@ bool operator<=(const String &Str1, const String &Str2)
         return true;
     else
         return false;
+}
+void String::Show() const
+{
+    cout << str << endl;
 }

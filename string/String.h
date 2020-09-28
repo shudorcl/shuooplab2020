@@ -31,6 +31,7 @@ public:
     friend bool operator>=(const String &Str1, const String &Str2);
     friend bool operator<(const String &Str1, const String &Str2);
     friend bool operator<=(const String &Str1, const String &Str2);
+    void Show() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
