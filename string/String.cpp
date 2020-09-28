@@ -80,3 +80,46 @@ String & String::operator=(const String &Str)
     strcpy(str, Str.str);
     return *this;
 }
+bool operator==(const String &Str1, const String &Str2)
+{
+    if(strcmp(Str1.str,Str2.str)==0)
+        return true;
+    else
+        return false;
+}
+bool operator!=(const String &Str1, const String &Str2)
+{
+    if(strcmp(Str1.str,Str2.str)!=0)
+        return true;
+    else
+        return false;
+}
+bool operator>(const String &Str1, const String &Str2)
+{
+    if(strcmp(Str1.str,Str2.str))
+        return true;
+    else
+        return false;
+}
+bool operator>=(const String &Str1, const String &Str2)
+{
+    if(strcmp(Str1.str,Str2.str)>=0)
+        return true;
+    else
+        return false;
+}
+bool operator>(const String &Str1, const String &Str2)
+{
+    if(strcmp(Str1.str,Str2.str)<0)
+        return true;
+    else
+        return false;
+}
+bool operator>=(const String &Str1, const String &Str2)
+{
+    if(strcmp(Str1.str,Str2.str)<=0)
+        return true;
+    else
+        return false;
+}
+

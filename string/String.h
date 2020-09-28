@@ -25,7 +25,12 @@ public:
     void ncopy(const String &Str,int n) const;
     void catenate(const String &Str) const;
     void ncatenate(const String &Str,int n) const;
-
+    friend bool operator==(const String &Str1, const String &Str2);
+    friend bool operator!=(const String &Str1, const String &Str2);
+    friend bool operator>(const String &Str1, const String &Str2);
+    friend bool operator>=(const String &Str1, const String &Str2);
+    friend bool operator<(const String &Str1, const String &Str2);
+    friend bool operator<=(const String &Str1, const String &Str2);
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
