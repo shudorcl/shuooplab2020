@@ -54,22 +54,26 @@ int String::rfind(const String &Str) const
     }
     return -1;
 }
-void String::copy(const String &Str) const
+char* & String::copy(const String &Str)
 {
     strcpy(str, Str.str);
+    return str;
 }
-void String::ncopy(const String &Str,int n) const
+char* & String::ncopy(const String &Str,int n)
 {
     strncpy(str,Str.str,n);
     str[n]='\0';
+    return str;
 }
-void String::catenate(const String &Str) const
+char* & String::catenate(const String &Str)
 {
     strcat(str, Str.str);
+    return str;
 }
-void String::ncatenate(const String &Str,int n) const
+char* & String::ncatenate(const String &Str,int n)
 {
     strncat(str, Str.str, n);
+    return str;
 }
 String & String::operator=(const String &Str)
 {
