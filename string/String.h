@@ -21,10 +21,10 @@ public:
     void reverse(String &Str);
     void uppercase(String &Str);
     void lowercase(String &Str);
-    void copy(const String &Str) const;
-    void ncopy(const String &Str,int n) const;
-    void catenate(const String &Str) const;
-    void ncatenate(const String &Str,int n) const;
+    char* & copy(const String &Str) ;
+    char* & ncopy(const String &Str,int n) ;
+    char* & catenate(const String &Str) ;
+    char* & ncatenate(const String &Str,int n) ;
     friend bool operator==(const String &Str1, const String &Str2);
     friend bool operator!=(const String &Str1, const String &Str2);
     friend bool operator>(const String &Str1, const String &Str2);
