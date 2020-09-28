@@ -9,6 +9,8 @@ String::String(const char *s)
     str = new char[strlen(s) + 1];
     strcpy(str, s);
     str[strlen(s)] = '\0';
+    cout << "A String is constructed.("
+         << str << ')' << endl;
 }
 String::String(const char *s, int n)
 {
@@ -18,6 +20,8 @@ String::String(const char *s, int n)
         str = new char[n + 1];
     strcpy(str, s);
     str[n] = '\0';
+    cout << "A String is constructed.("
+         << str << ')' << endl;
 }
 String::String(int n, char c)
 {
@@ -26,20 +30,24 @@ String::String(int n, char c)
     for (i = 0; i < n; i++)
         str[i] = c;
     str[n] = '\0';
+    cout << "A String is constructed.("
+         << str << ')' << endl;
 }
 String::String(const String &Str)
 {
     str = new char[strlen(Str.str) + 1];
     strcpy(str, Str.str);
+    cout << "A String is constructed.("
+         << str << ')' << endl;
 }
 String::~String()
 {
-    static int a=0;
+    static int a = 0;
     if (*this != NULL)
         delete[] str;
     a++;
-    cout<<"Now we'll destruct MY_STRING.("
-        <<a<<")"<<endl;
+    cout << "Now we'll destruct MY_STRING.("
+         << a << ")" << endl;
 }
 int String::length() const
 {
