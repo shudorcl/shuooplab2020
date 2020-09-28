@@ -58,3 +58,25 @@ void String::copy(const String &Str) const
 {
     strcpy(str, Str.str);
 }
+void String::ncopy(const String &Str,int n) const
+{
+    strncpy(str,Str.str,n);
+    str[n]='\0';
+}
+void String::catenate(const String &Str) const
+{
+    strcat(str, Str.str);
+}
+void String::ncatenate(const String &Str,int n) const
+{
+    strncat(str, Str.str, n);
+}
+String & String::operator=(const String &Str)
+{
+    if(this==&Str)
+        return *this;
+    delete[] str;
+    str = new char[strlen(Str.str) + 1];
+    strcpy(str, Str.str);
+    return *this;
+}

@@ -11,6 +11,7 @@ public:
     String(int n, char c);
     String(const String &Str);
     String(const String &Str, int pos, int n);
+    String & operator=(const String &Str);
     ~String() {}//
     //String Function
     int length() const;
@@ -21,6 +22,10 @@ public:
     void uppercase(String &Str);
     void lowercase(String &Str);
     void copy(const String &Str) const;
+    void ncopy(const String &Str,int n) const;
+    void catenate(const String &Str) const;
+    void ncatenate(const String &Str,int n) const;
+
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
