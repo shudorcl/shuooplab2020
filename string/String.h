@@ -18,7 +18,7 @@ public:
     int find(const String &Str) const;
     int rfind(const String &Str) const;
     void swap(String &Str);
-    void reverse(String &Str);
+    char* &reverse();
     void uppercase(String &Str);
     void lowercase(String &Str);
     char *&copy(const String &Str);
@@ -31,7 +31,10 @@ public:
     friend bool operator>=(const String &Str1, const String &Str2);
     friend bool operator<(const String &Str1, const String &Str2);
     friend bool operator<=(const String &Str1, const String &Str2);
+    char &operator[](int index) const;
     void Show() const;
+    char &front() const;
+    char &back() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange

@@ -102,6 +102,20 @@ int String::rfind(const String &Str) const
     }
     return -1;
 }
+char* &String::reverse()
+{
+//Well,as for Chinese ,it may not work correctly...
+    int i, j, length = strlen(str);
+    char *temp = new char[length+1];
+    for (i = 0,j=length; i < length;i++,j--)
+    {
+        temp[i] = str[j - 1];
+    }
+    temp[length] = '\0';
+    strcpy(str, temp);
+    delete[] temp;
+    return str;
+}
 char *&String::copy(const String &Str)
 {
     strcpy(str, Str.str);
@@ -174,7 +188,20 @@ bool operator<=(const String &Str1, const String &Str2)
     else
         return false;
 }
+char &String::operator[](int index) const
+{
+    return str[index];
+}
 void String::Show() const
 {
     cout << str << endl;
+}
+
+char& String::front() const
+{
+    return str[0];
+}
+char &String::back() const
+{
+    return str[strlen(str)-1];
 }
