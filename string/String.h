@@ -5,9 +5,10 @@ using namespace std;
 class String
 {
 private:
-    char *str;
+    char *strp;
     int m_str;//the length of the String
 public:
+    char *str;
     String(const char *s = "");
     String(const char *s, int n);
     String(int n, char c);
