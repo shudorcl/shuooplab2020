@@ -102,7 +102,7 @@ int String::rfind(const String &Str) const
     }
     return -1;
 }
-char* &String::reverse()
+/*char* &String::reverse()
 {
 //Well,as for Chinese ,it may not work correctly...
     int i, j, length = strlen(str);
@@ -114,6 +114,26 @@ char* &String::reverse()
     temp[length] = '\0';
     strcpy(str, temp);
     delete[] temp;
+    return str;
+}*/
+//Maybe we should use strrev...
+char* &String::reverse()
+{
+    strrev(str);
+    return str;
+}
+char* &String::ChineseReverse() 
+{
+	int length = strlen(str),t=length;
+	for (int i=0; i<length/2; i+=2,t-=2) {
+		int ret = str[i];
+		str[i] = str[t-2];
+		str[t-2] = ret;
+
+		ret = str[i+1];
+		str[i+1] = str[t-1];
+		str[t-1] = ret;
+	}
     return str;
 }
 char *&String::copy(const String &Str)

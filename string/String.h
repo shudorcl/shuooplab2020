@@ -19,6 +19,7 @@ public:
     int rfind(const String &Str) const;
     void swap(String &Str);
     char* &reverse();
+    char* &ChineseReverse();
     void uppercase(String &Str);
     void lowercase(String &Str);
     char *&copy(const String &Str);

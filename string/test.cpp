@@ -27,7 +27,7 @@ int main()
           << "\nArk's back:" << ArkOne.back()
           << endl;
      cout << "AAA[3]:" << AAA[3] << endl;
-     cout << "Now we'll reverse LiDang:" << LiDang.reverse();
+     cout << "Now we'll reverse LiDang:" << LiDang.ChineseReverse();
      cout << "\nArkOne--->" << ArkOne.reverse()
           << endl;
      return 0;
