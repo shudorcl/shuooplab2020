@@ -132,10 +132,54 @@ String & String::insert(int p0,const char *s)
     return *this;
 }
 
-
 //the function of substr
 String String::substr(int pos,int n) const
 {
     String temp(*this,pos,n);
     return temp;
+}
+//the function of swap
+String &String::swap(const char *s)
+{
+   char p_temp[100];
+   int  size =(int)strlen(s);
+   strcpy(p_temp,s);
+   p_temp[size] = '\0';
+   strcpy(str,p_temp);
+   return * this;
+}
+String & String::swap(const String & s)
+{
+    char p_temp[100],g_temp[100];
+    int size = (int)strlen(s.str);
+    strcpy(p_temp, s.str);
+    strcpy(g_temp,str);
+    p_temp[size] = '\0';
+    g_temp[m_str] ='\0';
+    strcpy(str, p_temp);
+    strcpy(s.str,g_temp);
+    return *this;
+}
+//the function of clear
+void String::clear(String &s)
+{
+    char *p=s.str;
+    *p='\0';
+}
+//the function of pop_back
+void String::pop_back(String &s)
+{
+    char *p=s.str;
+    while(*p!='\0')
+        p++;
+    p--;
+    *p='\0';
+}
+void String::reverse(String &s)
+{
+    int first, last;
+    first = 0;
+    last = (int)strlen(s.str);
+    while ((first != last) && (first != --last))
+        std::swap(s.str[first++], s.str[last]);
 }
