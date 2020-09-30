@@ -10,6 +10,6 @@ RCL's Mission
 5. strncat✔
 6. find✔
 7. rfind✔
-8. operater =✔
+8. operator =✔
 
 Wow, so many (；′⌒`)
