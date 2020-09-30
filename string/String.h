@@ -11,26 +11,31 @@ public:
     String(int n, char c);
     String(const String &Str);
     String(const String &Str, int pos, int n);
-    String & operator=(const String &Str);
-    ~String() {}//
+    String &operator=(const String &Str);
+    virtual ~String(); //
     //String Function
     int length() const;
     int find(const String &Str) const;
     int rfind(const String &Str) const;
     void swap(String &Str);
-    void reverse(String &Str);
+    char* &reverse();
+    char* &ChineseReverse();
     void uppercase(String &Str);
     void lowercase(String &Str);
-    char* & copy(const String &Str) ;
-    char* & ncopy(const String &Str,int n) ;
-    char* & catenate(const String &Str) ;
-    char* & ncatenate(const String &Str,int n) ;
+    char *&copy(const String &Str);
+    char *&ncopy(const String &Str, int n);
+    char *&catenate(const String &Str);
+    char *&ncatenate(const String &Str, int n);
     friend bool operator==(const String &Str1, const String &Str2);
     friend bool operator!=(const String &Str1, const String &Str2);
     friend bool operator>(const String &Str1, const String &Str2);
     friend bool operator>=(const String &Str1, const String &Str2);
     friend bool operator<(const String &Str1, const String &Str2);
     friend bool operator<=(const String &Str1, const String &Str2);
+    char &operator[](int index) const;
+    void Show() const;
+    char &front() const;
+    char &back() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //xhange
