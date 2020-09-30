@@ -8,7 +8,7 @@ private:
     char *str;
     int m_str;//the length of the String
 public:
-    char *strs;
+    //char *str;
     String(const char *s = "");
     String(const char *s, int n);
     String(int n, char c);
@@ -40,5 +40,6 @@ public:
     void pop_back();
     //the defination of reverse
     void reverse();
+    void Show() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H

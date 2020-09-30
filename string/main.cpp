@@ -17,16 +17,16 @@ int main()
 {
     //test for append
     String s1 = "ababaaabg";
-    cout << s1.strs << endl;
+    s1.Show();
     String str2="printjjjjjjjjjjj";
     s1.append("Writing ");      // "Writing "
-    cout<<s1.strs<<endl;
+    s1.Show();
     s1.append(str2,6,3);        // "10 "
-    cout<<s1.strs<<endl;
+    s1.Show();
     s1.append(str2);
-    cout<<s1.strs<<endl;
+    s1.Show();
     s1.append(5,'w');
-    cout<<s1.strs<<endl;
+    s1.Show();
     //test for empty
     String s2= "ffaffafafaaffaf";
     cout<<s2.empty()<<endl;
@@ -35,30 +35,32 @@ int main()
     //test for insert
     String s3="wwwwwwwwwwwww";
     s3.insert(5,"testeeeee");
-    cout<<s3.strs<<endl;
+    s3.Show();
     //test for substr
     String s4="jjjjjjjjjjjjj";
-    cout<<s4.substr(3,4).strs<<endl;
+    s4.substr(3,4);
+    s4.Show();
+    //cout<<s4.substr(3,4).str<<endl;
     //test for swap
     String s5="bbbbbbbbbb";
     String s6="cccccccccc";
     s5.swap("aaaaaaaaaaa");
-    cout<<s5.strs<<endl;
+    s5.Show();
     s5.swap(s6);
-    cout<<s5.strs<<endl;
+    s5.Show();
     //test for clear
     String s7="am i clear?";
     s7.clear();
-    cout<<s7.strs<<endl;
+    s7.Show();
     cout<<s7.empty()<<endl;
     //test for pop_back
     String s8="this is a temp word k";
-    cout<<s8.strs<<endl;
+    s8.Show();
     s8.pop_back();
-    cout<<s8.strs<<endl;
+    s8.Show();
     //test for reverse
     String s9="please reverse it";
     s9.reverse();
-    cout<<s9.strs<<endl;
+    s9.Show();
     return 0;
 }

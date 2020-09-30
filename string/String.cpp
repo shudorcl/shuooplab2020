@@ -7,8 +7,8 @@ using namespace std;
 //the defination of construct function
 String::String(const char *s)
 {
-    strs=new char[strlen(s)+1];
-    strcpy(strs,s);
+    str=new char[strlen(s)+1];
+    strcpy(str,s);
 }
 
 String::String(const char *s,int n)
@@ -18,10 +18,10 @@ String::String(const char *s,int n)
         n=m;
     if(n<0)
         n=0;
-    strs=new char[n+1];
+    str=new char[n+1];
     for(i=0;i<n;i++)
-        strs[i]=s[i];
-    strs[i]='\0';
+        str[i]=s[i];
+    str[i]='\0';
 }
 
 String::String(int n,char c)
@@ -29,46 +29,46 @@ String::String(int n,char c)
     int i;
     if(n<0)
         n=0;
-    strs=new char[n+1];
+    str=new char[n+1];
     for(i=0;i<n;i++)
-        strs[i]=c;
-    strs[i]='\0';
+        str[i]=c;
+    str[i]='\0';
 }
 String::String(const String &Str)
 {
-    strs =new char[strlen(Str.strs)+1];
-    strcpy(strs,Str.strs);
+    str =new char[strlen(Str.str)+1];
+    strcpy(str,Str.str);
 }
 
 String::String(const String &Str,int pos,int n)
 {
     int i,m;
-    m=(int)strlen(Str.strs);
+    m=(int)strlen(Str.str);
     if(pos>m)
     {
-        strs=new char[1];
-        strs[0]='\0';
+        str=new char[1];
+        str[0]='\0';
         return;
     }
     if(m-pos<n)
         n=m-pos;
     if(n<0)
         n=0;
-    strs =new char[n+1];
+    str =new char[n+1];
     for(i=0;i<n;i++)
-        strs[i]=Str.strs[pos+i];
-    strs[i]='\0';
+        str[i]=Str.str[pos+i];
+    str[i]='\0';
 }
 String::~String()
 {
-    if(strs!=NULL)
-        delete [] strs;
+    if(str!=NULL)
+        delete [] str;
 }
 //the defination of append
 String &String::append(const String &s)
 {
-    strcat(strs, s.strs);
-    m_str += strlen(s.strs);
+    strcat(str, s.str);
+    m_str += strlen(s.str);
     return *this;
 }
 
@@ -79,18 +79,18 @@ String &String::append(const String &s, int pos, int n)
     int k = 0;
     for(int i = pos ;i < n+pos ;i++)
     {
-        temp[k] = s.strs[i];
+        temp[k] = s.str[i];
         k++;
     }
     temp[k]='\0';
-    strcat(strs,temp);
+    strcat(str,temp);
     m_str += strlen(temp);
     return * this;
 }
 
 String & String::append(const char *s)
 {
-    strcat(strs,s);
+    strcat(str,s);
     m_str += strlen(s);
     return *this;
 }
@@ -104,7 +104,7 @@ String &String::append(int pos, const char s)
         p_temp[i] = s;
     }
     p_temp[i] = '\0';
-    strcat(strs, p_temp);
+    strcat(str, p_temp);
     m_str += strlen(p_temp);
     return *this;
 }
@@ -112,7 +112,7 @@ String &String::append(int pos, const char s)
 //the functiong of the empty
 bool String::empty() const
 {
-    if(strs[0] =='\0' )
+    if(str[0] =='\0' )
         return true;
     else
         return false;
@@ -121,16 +121,16 @@ bool String::empty() const
 //the function of insert
 String & String::insert(int p0,const char *s)
 {
-    int n=(int)strlen(strs);
+    int n=(int)strlen(str);
     if(p0>n)
         p0=n;
-    char *p=new char[strlen(strs)+strlen(s)+1];
-    strncpy(p,strs,p0);
+    char *p=new char[strlen(str)+strlen(s)+1];
+    strncpy(p,str,p0);
     p[p0]='\0';
     strcat(p,s);
-    strcat(p,strs+p0);
-    delete [] strs;
-    strs=p;
+    strcat(p,str+p0);
+    delete [] str;
+    str=p;
     return *this;
 }
 
@@ -147,28 +147,28 @@ String &String::swap(const char *s)
    int  size =(int)strlen(s);
    strcpy(p_temp,s);
    p_temp[size] = '\0';
-   strcpy(strs,p_temp);
+   strcpy(str,p_temp);
    return * this;
 }
 String & String::swap(const String & s)
 {
     char p_temp[100];
-    int size = (int)strlen(s.strs);
-    strcpy(p_temp, s.strs);
+    int size = (int)strlen(s.str);
+    strcpy(p_temp, s.str);
     p_temp[size] = '\0';
-    strcpy(strs, p_temp);
+    strcpy(str, p_temp);
     return *this;
 }
 //the function of clear
 void String::clear()
 {
-    char *p=strs;
+    char *p=str;
     *p='\0';
 }
 //the function of pop_back
 void String::pop_back()
 {
-    char *p=strs;
+    char *p=str;
     while(*p!='\0')
         p++;
     p--;
@@ -178,7 +178,12 @@ void String::reverse()
 {
     int first, last;
     first = 0;
-    last = (int)strlen(strs);
+    last = (int)strlen(str);
     while ((first != last) && (first != --last))
-        std::swap(strs[first++], strs[last]);
+        std::swap(str[first++], str[last]);
 }
+void String::Show() const
+{
+    cout << str << endl;
+}
+
