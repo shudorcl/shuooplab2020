@@ -5,10 +5,10 @@ using namespace std;
 class String
 {
 private:
-    char *strp;
+    char *str;
     int m_str;//the length of the String
 public:
-    char *str;
+    char *strs;
     String(const char *s = "");
     String(const char *s, int n);
     String(int n, char c);
@@ -25,23 +25,20 @@ public:
     String& append(int pos , const char s);
     //the functiong of the empty
     bool empty() const;
-    //the function of insert
+    //the defination of insert
     String & insert(int p0,const char *s);
     String & insert(int idx,const string& str,int str_idx,int str_num);
     String & insert(int __pos, const char* __s,int __n);
-    //the function of the substr
-    String substr(int pos,int n) const;
+    //the defination of the substr
+    String substr(int pos,int n);
     //the function of swap
     String & swap(const char * s);
     String & swap(const String & s);
-    //the function of clear
-    void clear(String &s);
-    //the function of pop_back
-    void pop_back(String &s);
-    //the function of reverse
-    void reverse(String &s);
+    //the defination of clear
+    void clear();
+    //the defination of pop_back
+    void pop_back();
+    //the defination of reverse
+    void reverse();
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
-
-
-
