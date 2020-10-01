@@ -6,7 +6,7 @@ class String
 {
 private:
     char *str;
-    int m_str;//the length of the String
+    int m_str; //the length of the String
 public:
     //char *str;
     String(const char *s = "");
@@ -15,25 +15,25 @@ public:
     String(const String &Str);
     String(const String &Str, int pos, int n);
     ~String();
-    
+
     //String Function
     //workingspace for sunyiyan
     //the defination of append
-    String& append(const String &s);
-    String& append(const String &s,int pos,int n);
-    String& append(const char * s);
-    String& append(int pos , const char s);
+    String &append(const String &s);
+    String &append(const String &s, int pos, int n);
+    String &append(const char *s);
+    String &append(int pos, const char s);
     //the functiong of the empty
     bool empty() const;
     //the defination of insert
-    String & insert(int p0,const char *s);
-    String & insert(int idx,const string& str,int str_idx,int str_num);
-    String & insert(int __pos, const char* __s,int __n);
+    String &insert(int p0, const char *s);
+    String &insert(int idx, const string &str, int str_idx, int str_num);
+    String &insert(int __pos, const char *__s, int __n);
     //the defination of the substr
-    String substr(int pos,int n);
+    String substr(int pos, int n);
     //the function of swap
-    String & swap(const char * s);
-    String & swap(const String & s);
+    String &swap(const char *s);
+    String &swap(const String &s);
     //the defination of clear
     void clear();
     //the defination of pop_back
@@ -48,8 +48,8 @@ public:
     int find(const String &Str) const;
     int rfind(const String &Str) const;
     void swap(String &Str);
-    char* &reverse();
-    char* &ChineseReverse();
+    char *&reverse();
+    char *&ChineseReverse();
     void uppercase(String &Str);
     void lowercase(String &Str);
     char *&copy(const String &Str);

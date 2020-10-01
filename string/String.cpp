@@ -1,7 +1,7 @@
-#include <iostream>
-#include <cstring>
 #include "String.h"
 #include "windows.h"
+#include <cstring>
+#include <iostream>
 using namespace std;
 //rcl's construc func
 String::String(const char *s)
@@ -9,10 +9,10 @@ String::String(const char *s)
     str = new char[strlen(s) + 1];
     strcpy(str, s);
     str[strlen(s)] = '\0';
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE);
     cout << "A String is constructed.(Method 1)("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(const char *s, int n)
 {
@@ -25,7 +25,7 @@ String::String(const char *s, int n)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
     cout << "A String is constructed.(Method 2)("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(int n, char c)
 {
@@ -34,10 +34,10 @@ String::String(int n, char c)
     for (i = 0; i < n; i++)
         str[i] = c;
     str[n] = '\0';
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);
     cout << "A String is constructed.(Method 3)("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(const String &Str)
 {
@@ -46,8 +46,30 @@ String::String(const String &Str)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);
     cout << "A String is constructed.(Method copy)("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
+String::String(const String &Str, int pos, int n)
+{
+    int i, m;
+    m = (int)strlen(Str.str);
+    if (pos > m)
+    {
+        str = new char[1];
+        str[0] = '\0';
+        return;
+    }
+    if (m - pos < n)
+        n = m - pos;
+    if (n < 0)
+        n = 0;
+    str = new char[n + 1];
+    for (i = 0; i < n; i++)
+        str[i] = Str.str[pos + i];
+    str[i] = '\0';
+    cout << "A String is constructed.(Method 4)("
+         << str << ')' << endl;
+}
+
 String::~String()
 {
     static int DestructCount = 0;
@@ -70,52 +92,51 @@ int String::size() const
 //rcl's official work
 int String::find(const String &Str) const
 {
-    int i, j, flag=0;
-    if(strlen(Str.str)>strlen(str))
+    int i, j, m, n, flag;
+    m = strlen(Str.str);
+    n = strlen(str);
+    if (m > n)
         return -1;
-    for (i = 0,j=0; i < strlen(str);i++)
-        if(str[i]==Str.str[j])
-            for (; j < strlen(Str.str);i++,j++)
+    for (i = 0; i < n - m; i++)
+    {
+        flag = 1;
+        for (j = 0; j < m; j++)
+        {
+            if (Str.str[j] != str[i + j])
             {
-                if(str[i]!=Str.str[j])
-                    {
-                        flag = 1;
-                        break;
-                    }
-                return i - j;
+                flag = 0;
+                break;
             }
-    return (flag) ? -1 : 1;
+        }
+        if (flag)
+            return i;
+    }
+    return -1;
 }
-String::String(const String &Str)
+int String::rfind(const String &Str) const
 {
-    str =new char[strlen(Str.str)+1];
-    strcpy(str,Str.str);
+    int i, j, m, n, flag;
+    m = strlen(Str.str);
+    n = strlen(str);
+    if (m > n)
+        return -1;
+    for (i = n - m - 1; i >= 0; i--)
+    {
+        flag = 1;
+        for (j = m - 1; j >= 0; j--)
+        {
+            if (Str.str[j] != str[i + j])
+            {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag)
+            return i;
+    }
+    return -1;
 }
 
-String::String(const String &Str,int pos,int n)
-{
-    int i,m;
-    m=(int)strlen(Str.str);
-    if(pos>m)
-    {
-        str=new char[1];
-        str[0]='\0';
-        return;
-    }
-    if(m-pos<n)
-        n=m-pos;
-    if(n<0)
-        n=0;
-    str =new char[n+1];
-    for(i=0;i<n;i++)
-        str[i]=Str.str[pos+i];
-    str[i]='\0';
-}
-String::~String()
-{
-    if(str!=NULL)
-        delete [] str;
-}
 //the defination of append
 String &String::append(const String &s)
 {
@@ -129,20 +150,20 @@ String &String::append(const String &s, int pos, int n)
     //setting the begin and the lens of the target
     char temp[100];
     int k = 0;
-    for(int i = pos ;i < n+pos ;i++)
+    for (int i = pos; i < n + pos; i++)
     {
         temp[k] = s.str[i];
         k++;
     }
-    temp[k]='\0';
-    strcat(str,temp);
+    temp[k] = '\0';
+    strcat(str, temp);
     m_str += strlen(temp);
-    return * this;
+    return *this;
 }
 
-String & String::append(const char *s)
+String &String::append(const char *s)
 {
-    strcat(str,s);
+    strcat(str, s);
     m_str += strlen(s);
     return *this;
 }
@@ -151,7 +172,7 @@ String &String::append(int pos, const char s)
 {
     char p_temp[100];
     int i = 0;
-    for(i = 0;i < pos ; i++)
+    for (i = 0; i < pos; i++)
     {
         p_temp[i] = s;
     }
@@ -164,45 +185,45 @@ String &String::append(int pos, const char s)
 //the functiong of the empty
 bool String::empty() const
 {
-    if(str[0] =='\0' )
+    if (str[0] == '\0')
         return true;
     else
         return false;
 }
 
 //the function of insert
-String & String::insert(int p0,const char *s)
+String &String::insert(int p0, const char *s)
 {
-    int n=(int)strlen(str);
-    if(p0>n)
-        p0=n;
-    char *p=new char[strlen(str)+strlen(s)+1];
-    strncpy(p,str,p0);
-    p[p0]='\0';
-    strcat(p,s);
-    strcat(p,str+p0);
-    delete [] str;
-    str=p;
+    int n = (int)strlen(str);
+    if (p0 > n)
+        p0 = n;
+    char *p = new char[strlen(str) + strlen(s) + 1];
+    strncpy(p, str, p0);
+    p[p0] = '\0';
+    strcat(p, s);
+    strcat(p, str + p0);
+    delete[] str;
+    str = p;
     return *this;
 }
 
 //the function of substr
-String String::substr(int pos,int n)
+String String::substr(int pos, int n)
 {
-    String temp(*this,pos,n);
+    String temp(*this, pos, n);
     return temp;
 }
 //the function of swap
 String &String::swap(const char *s)
 {
-   char p_temp[100];
-   int  size =(int)strlen(s);
-   strcpy(p_temp,s);
-   p_temp[size] = '\0';
-   strcpy(str,p_temp);
-   return * this;
+    char p_temp[100];
+    int size = (int)strlen(s);
+    strcpy(p_temp, s);
+    p_temp[size] = '\0';
+    strcpy(str, p_temp);
+    return *this;
 }
-String & String::swap(const String & s)
+String &String::swap(const String &s)
 {
     char p_temp[100];
     int size = (int)strlen(s.str);
@@ -214,56 +235,37 @@ String & String::swap(const String & s)
 //the function of clear
 void String::clear()
 {
-    char *p=str;
-    *p='\0';
+    char *p = str;
+    *p = '\0';
 }
 //the function of pop_back
 void String::pop_back()
 {
-    char *p=str;
-    while(*p!='\0')
+    char *p = str;
+    while (*p != '\0')
         p++;
     p--;
-    *p='\0';
+    *p = '\0';
 }
-
-void String::Show() const
-{
-    cout << str << endl;
-}
-
-/*char* &String::reverse()
-{
-//Well,as for Chinese ,it may not work correctly...
-    int i, j, length = strlen(str);
-    char *temp = new char[length+1];
-    for (i = 0,j=length; i < length;i++,j--)
-    {
-        temp[i] = str[j - 1];
-    }
-    temp[length] = '\0';
-    strcpy(str, temp);
-    delete[] temp;
-    return str;
-}*/
 //Maybe we should use strrev...
-char* &String::reverse()
+char *&String::reverse()
 {
     strrev(str);
     return str;
 }
-char* &String::ChineseReverse()
+char *&String::ChineseReverse()
 {
-	int length = strlen(str),t=length;
-	for (int i=0; i<length/2; i+=2,t-=2) {
-		int ret = str[i];
-		str[i] = str[t-2];
-		str[t-2] = ret;
+    int length = strlen(str), t = length;
+    for (int i = 0; i < length / 2; i += 2, t -= 2)
+    {
+        int ret = str[i];
+        str[i] = str[t - 2];
+        str[t - 2] = ret;
 
-		ret = str[i+1];
-		str[i+1] = str[t-1];
-		str[t-1] = ret;
-	}
+        ret = str[i + 1];
+        str[i + 1] = str[t - 1];
+        str[t - 1] = ret;
+    }
     return str;
 }
 char *&String::copy(const String &Str)
@@ -346,15 +348,14 @@ void String::Show() const
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
     cout << str << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
-char& String::front() const
+char &String::front() const
 {
     return str[0];
 }
 char &String::back() const
 {
-    return str[strlen(str)-1];
+    return str[strlen(str) - 1];
 }
-//wu
