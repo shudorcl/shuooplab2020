@@ -15,6 +15,7 @@ public:
     virtual ~String(); //
     //String Function
     int length() const;
+    int size() const;
     int find(const String &Str) const;
     int rfind(const String &Str) const;
     void swap(String &Str);

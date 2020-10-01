@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "String.h"
-
+#include "windows.h"
 using namespace std;
 //rcl's construc func
 String::String(const char *s)
@@ -9,8 +9,10 @@ String::String(const char *s)
     str = new char[strlen(s) + 1];
     strcpy(str, s);
     str[strlen(s)] = '\0';
-    cout << "A String is constructed.("
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_BLUE);
+    cout << "A String is constructed.(Method 1)("
          << str << ')' << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(const char *s, int n)
 {
@@ -20,8 +22,10 @@ String::String(const char *s, int n)
         str = new char[n + 1];
     strcpy(str, s);
     str[n] = '\0';
-    cout << "A String is constructed.("
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
+    cout << "A String is constructed.(Method 2)("
          << str << ')' << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(int n, char c)
 {
@@ -30,15 +34,19 @@ String::String(int n, char c)
     for (i = 0; i < n; i++)
         str[i] = c;
     str[n] = '\0';
-    cout << "A String is constructed.("
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN);
+    cout << "A String is constructed.(Method 3)("
          << str << ')' << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(const String &Str)
 {
     str = new char[strlen(Str.str) + 1];
     strcpy(str, Str.str);
-    cout << "A String is constructed.("
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);
+    cout << "A String is constructed.(Method copy)("
          << str << ')' << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::~String()
 {
@@ -52,6 +60,10 @@ String::~String()
     cout << '(' << DestructCount << ')' << endl;
 }
 int String::length() const
+{
+    return strlen(str);
+}
+int String::size() const
 {
     return strlen(str);
 }
@@ -122,7 +134,7 @@ char* &String::reverse()
     strrev(str);
     return str;
 }
-char* &String::ChineseReverse() 
+char* &String::ChineseReverse()
 {
 	int length = strlen(str),t=length;
 	for (int i=0; i<length/2; i+=2,t-=2) {
@@ -214,7 +226,9 @@ char &String::operator[](int index) const
 }
 void String::Show() const
 {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
     cout << str << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
 char& String::front() const
