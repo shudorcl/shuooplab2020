@@ -39,7 +39,6 @@ public:
     //the defination of pop_back
     void pop_back();
     //the defination of reverse
-    void reverse();
     void Show() const;
     String &operator=(const String &Str);
     virtual ~String(); //

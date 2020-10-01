@@ -70,13 +70,21 @@ int String::size() const
 //rcl's official work
 int String::find(const String &Str) const
 {
-    int i;
-    if(n<0)
-        n=0;
-    str=new char[n+1];
-    for(i=0;i<n;i++)
-        str[i]=c;
-    str[i]='\0';
+    int i, j, flag=0;
+    if(strlen(Str.str)>strlen(str))
+        return -1;
+    for (i = 0,j=0; i < strlen(str);i++)
+        if(str[i]==Str.str[j])
+            for (; j < strlen(Str.str);i++,j++)
+            {
+                if(str[i]!=Str.str[j])
+                    {
+                        flag = 1;
+                        break;
+                    }
+                return i - j;
+            }
+    return (flag) ? -1 : 1;
 }
 String::String(const String &Str)
 {
@@ -218,14 +226,7 @@ void String::pop_back()
     p--;
     *p='\0';
 }
-void String::reverse()
-{
-    int first, last;
-    first = 0;
-    last = (int)strlen(str);
-    while ((first != last) && (first != --last))
-        std::swap(str[first++], str[last]);
-}
+
 void String::Show() const
 {
     cout << str << endl;
