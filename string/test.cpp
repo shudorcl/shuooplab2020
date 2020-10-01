@@ -30,5 +30,13 @@ int main()
      cout << "Now we'll reverse LiDang:" << LiDang.ChineseReverse();
      cout << "\nArkOne--->" << ArkOne.reverse()
           << endl;
+     String Arknight(ArkOne, 0, 3), Knight("Knight");
+     Arknight.append("Nights");
+     Arknight.Show();
+     //Arknight.swap(Knight);
+     //Arknight.Show();
+     cout << "Knight's front is " << Knight.front()
+          << "\n back is " << Knight.back()
+          << endl;
      return 0;
 }
