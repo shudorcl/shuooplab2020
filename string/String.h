@@ -43,3 +43,4 @@ public:
     void Show() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
+//
