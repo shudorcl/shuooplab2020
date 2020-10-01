@@ -41,6 +41,31 @@ public:
     //the defination of reverse
     void reverse();
     void Show() const;
+    String &operator=(const String &Str);
+    virtual ~String(); //
+    //String Function
+    int length() const;
+    int find(const String &Str) const;
+    int rfind(const String &Str) const;
+    void swap(String &Str);
+    char* &reverse();
+    char* &ChineseReverse();
+    void uppercase(String &Str);
+    void lowercase(String &Str);
+    char *&copy(const String &Str);
+    char *&ncopy(const String &Str, int n);
+    char *&catenate(const String &Str);
+    char *&ncatenate(const String &Str, int n);
+    friend bool operator==(const String &Str1, const String &Str2);
+    friend bool operator!=(const String &Str1, const String &Str2);
+    friend bool operator>(const String &Str1, const String &Str2);
+    friend bool operator>=(const String &Str1, const String &Str2);
+    friend bool operator<(const String &Str1, const String &Str2);
+    friend bool operator<=(const String &Str1, const String &Str2);
+    char &operator[](int index) const;
+    void Show() const;
+    char &front() const;
+    char &back() const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
 //
