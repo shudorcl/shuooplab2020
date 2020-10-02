@@ -1,1 +1,71 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
 
+String::String(const char *s)
+{
+    str = new char[strlen(s) + 1];
+    strcpy(str, s);
+}
+
+String::~String()
+{
+    static int DestructCount = 0;
+    cout << "Now we'll destruct a String.("
+         << str << ')';
+    if (str != NULL)
+        delete[] str;
+    DestructCount++;
+
+    cout << '(' << DestructCount << ')' << endl;
+}
+//返回字符串长度
+int String::length() const {
+    return strlen(str);
+}
+//将小写转换成大写
+char* String::uppercase() {
+    int i;
+    for(i=0;str[i]!='\0';i++)
+    {
+        if(str[i]<='z'&&str[i]>='a')
+            str[i]=str[i]-'a'+'A';
+    }
+    return str;
+}
+//将大写转换成小写
+char* String::lowercase() {
+    int i;
+    for(i=0;str[i]!='\0';i++)
+    {
+        if(str[i]<='Z'&&str[i]>='A')
+            str[i]=str[i]-'A'+'a';
+    }
+    return str;
+}
+//将字符串转换成对应的数值
+double String::str_to_inter()
+{
+    int i=0,s=1;
+    double sum=0,t=0;
+    if(str[0]=='+'||str[0]=='-')//先判断符号
+        i=1;
+        if(str[0]=='-')
+            s=-1;
+        for(i;str[i]!='\0';i++)
+             {
+                 sum = sum * 10 + str[i] - '0';
+             }
+    return sum*s;
+}
+//返回字符串开始位置
+char* String::begin_() const {
+    return str;
+}
+//返回字符串结尾位置
+char* String::end_() const {
+    int i;
+    for(i=0;str[i]!='\0';i++);//找到字符串结尾的位置
+    return (str+i);
+}
