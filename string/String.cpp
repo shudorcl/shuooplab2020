@@ -77,6 +77,7 @@ String::~String()
          << str << ')';
     if (str != NULL)
         delete[] str;
+    str = NULL;
     DestructCount++;
 
     cout << '(' << DestructCount << ')' << endl;
