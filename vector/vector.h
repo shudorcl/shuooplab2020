@@ -3,22 +3,20 @@
 #include <iostream>
 using namespace std;
 
-template <typename TYPE> class Vector
+class Vector
 {
 public:
-    Vector(const TYPE &x = 0, const TYPE &y = 0);
+    Vector(const int &x = 0, const int &y = 0);
     void Show() const
     {
         cout << '(' << a << ", " << b << ')';
     }
-    TYPE &GetX();
-    TYPE &GetY();
-    TYPE &GetNorm();
+    int &GetX();
+    int &GetY();
+    int &GetNorm();
 
 private:
-    TYPE a, b;
+    int a, b;
 };
-
-
 
 #endif

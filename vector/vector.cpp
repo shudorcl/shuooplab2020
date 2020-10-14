@@ -1,17 +1,17 @@
-#include <iostream>
 #include "vector.h"
+#include <iostream>
 using namespace std;
-template <typename TYPE>
-Vector<TYPE>::Vector(const TYPE &x, const TYPE &y)
+
+Vector::Vector(const int &x, const int &y)
 {
     a = x;
     b = y;
 }
-template <typename TYPE> TYPE & Vector<TYPE>::GetX()
+int &Vector::GetX()
 {
     return a;
 }
-template <typename TYPE> TYPE & Vector<TYPE>::GetY()
+int &Vector::GetY()
 {
     return b;
 }
