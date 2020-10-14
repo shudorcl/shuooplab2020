@@ -1,5 +1,6 @@
 #ifndef STRING_FUNCTION_STRING_HEAD_H
 #define STRING_FUNCTION_STRING_HEAD_H
+#include <iostream>
 using namespace std;
 
 class String
@@ -14,7 +15,7 @@ public:
     String(int n, char c);
     String(const String &Str);
     String(const String &Str, int pos, int n);
-    ~String();
+    virtual ~String();
 
     //String Function
     //workingspace for sunyiyan
@@ -27,7 +28,7 @@ public:
     bool empty() const;
     //the defination of insert
     String &insert(int p0, const char *s);
-    String &insert(int idx, const string &str, int str_idx, int str_num);
+    String &insert(int idx, const String &str, int str_idx, int str_num);
     String &insert(int __pos, const char *__s, int __n);
     //the defination of the substr
     String substr(int pos, int n);
@@ -41,7 +42,6 @@ public:
     //the defination of reverse
     void Show() const;
     String &operator=(const String &Str);
-    virtual ~String(); //
     //String Function
     int length() const;
     int size() const;
@@ -56,14 +56,17 @@ public:
     char *&ncopy(const String &Str, int n);
     char *&catenate(const String &Str);
     char *&ncatenate(const String &Str, int n);
+    friend String operator+(const String &Str1, const String &Str2);
+    friend void operator+=(String &Str1, const String &Str2);
     friend bool operator==(const String &Str1, const String &Str2);
     friend bool operator!=(const String &Str1, const String &Str2);
     friend bool operator>(const String &Str1, const String &Str2);
     friend bool operator>=(const String &Str1, const String &Str2);
     friend bool operator<(const String &Str1, const String &Str2);
     friend bool operator<=(const String &Str1, const String &Str2);
+    friend ostream &operator<<(ostream &out, const String &Str);
+    friend istream &operator>>(istream &in, String &Str);
     char &operator[](int index) const;
-    void Show() const;
     char &front() const;
     char &back() const;
 };
