@@ -1,5 +1,6 @@
 #ifndef STRING_FUNCTION_STRING_HEAD_H
 #define STRING_FUNCTION_STRING_HEAD_H
+#include <iostream>
 using namespace std;
 
 class String
@@ -55,12 +56,16 @@ public:
     char *&ncopy(const String &Str, int n);
     char *&catenate(const String &Str);
     char *&ncatenate(const String &Str, int n);
+    friend String operator+(const String &Str1, const String &Str2);
+    friend void operator+=(String &Str1, const String &Str2);
     friend bool operator==(const String &Str1, const String &Str2);
     friend bool operator!=(const String &Str1, const String &Str2);
     friend bool operator>(const String &Str1, const String &Str2);
     friend bool operator>=(const String &Str1, const String &Str2);
     friend bool operator<(const String &Str1, const String &Str2);
     friend bool operator<=(const String &Str1, const String &Str2);
+    friend ostream &operator<<(ostream &out, const String &Str);
+    friend istream &operator>>(istream &in, String &Str);
     char &operator[](int index) const;
     char &front() const;
     char &back() const;

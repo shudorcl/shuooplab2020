@@ -341,6 +341,36 @@ bool operator<=(const String &Str1, const String &Str2)
     else
         return false;
 }
+ostream &operator<<(ostream &out, const String &Str)
+{
+    out << Str.str;
+    return out;
+}
+
+istream &operator>>(istream &in, String &Str)
+{
+    char str[1000];
+    in >> str;
+    Str = str; // 利用转换构造函数（自动转换），再利用赋值运算
+    return in;
+}
+
+String operator+(const String &Str1, const String &Str2)
+{
+    String temp;
+    temp = new char[strlen(Str1.str) + strlen(Str2.str) + 1];
+    strcpy(temp.str, Str1.str);
+    strcat(temp.str, Str2.str);
+    return temp;
+}
+void operator+=(String &Str1, const String &Str2)
+{
+    String temp;
+    temp = new char[strlen(Str1.str) + strlen(Str2.str) + 1];
+    strcpy(temp.str, Str1.str);
+    strcat(temp.str, Str2.str);
+    Str1 = temp;
+}
 char &String::operator[](int index) const
 {
     return str[index];
