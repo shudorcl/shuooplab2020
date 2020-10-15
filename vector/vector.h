@@ -13,7 +13,7 @@ public:
     }
     int &GetX();
     int &GetY();
-    int &GetNorm();
+    double &GetNorm();
 
 private:
     int a, b;
