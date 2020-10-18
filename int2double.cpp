@@ -245,7 +245,7 @@ public:
             //throw e();
         }
 
-        Vector temp = Vector(this->size);
+        Vector temp(this->size);
         for (int i = 0; i < this->size; i++)
         {
             temp.nums[i] = this->nums[i] + ov.nums[i];
@@ -260,7 +260,7 @@ public:
             //throw e();
         }
 
-        Vector temp = Vector(this->size);
+        Vector temp(this->size);
         for (int i = 0; i < this->size; i++)
         {
             temp.nums[i] = this->nums[i] - ov.nums[i];
@@ -343,7 +343,7 @@ public:
 
     Vector operator*(double mult)
     {
-        Vector temp = Vector(this->size);
+        Vector temp(this->size);
         for (int i = 0; i < this->size; i++)
         {
             temp.nums[i] = this->nums[i] * mult;
@@ -368,4 +368,8 @@ private:
 
 int main()
 {
+    Vector v1(1, 1);
+    Vector v2 = v1;
+    v2.show();
+    return 0;
 }
