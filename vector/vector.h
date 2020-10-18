@@ -6,17 +6,17 @@ using namespace std;
 class Vector
 {
 public:
-    Vector(const int &x = 0, const int &y = 0);
-    void Show() const
-    {
-        cout << '(' << a << ", " << b << ')';
-    }
-    int &GetX();
-    int &GetY();
-    double &GetNorm();
+    Vector(int vdim=1);
+    Vector(int vdim, double prim);
+    Vector(Vector &ov);
+    Vector &operator=(Vector &ov);
+    virtual ~Vector();
+    void Show() const;
+    double Modular();
 
 private:
-    int a, b;
+    double *nums;
+    int size;
 };
 
 #endif

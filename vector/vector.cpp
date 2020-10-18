@@ -1,24 +1,58 @@
 #include "vector.h"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 using namespace std;
 
-Vector::Vector(const int &x, const int &y)
+Vector::Vector(int vdim)
+    : nums(new double(vdim)), size(vdim)
 {
-    a = x;
-    b = y;
+    //分配内存
+    //初始化，并记录size
+    for (int i = 0; i < vdim; i++)
+        nums[i] = 0;
 }
-int &Vector::GetX()
+Vector::Vector(int vdim, double prim)
+    : nums(new double(vdim)), size(vdim)
 {
-    return a;
+    for (int i = 0; i < vdim; i++)
+        nums[i] = prim;
 }
-int &Vector::GetY()
+Vector::Vector(Vector &ov)
 {
-    return b;
+    /*if (nums!=NULL)
+    {
+        delete[] nums;
+        nums = NULL;
+    }*/
+    nums = new double(ov.size);
+    //赋值，并记录size
+    for (int i = 0; i < ov.size; i++)
+        nums[i] = ov.nums[i];
+    size = ov.size;
 }
-double &Vector::GetNorm()
+Vector::~Vector()
 {
-    int sum = a * a + b * b;
-    double res = sqrt(sum);
-    return res;
+    if(nums)
+        delete[] nums;
+    nums = NULL;
+}
+double Vector::Modular()
+{
+    double sum;
+    for (int i = 0; i < size; i++)
+    {
+        sum += pow((nums[i]), 2);
+    }
+    return sqrt(sum);
+}
+void Vector::Show() const
+{
+    cout << '[';
+    for (int i = 0; i < size; i++)
+        {
+            if(i!=size-1)
+                cout << nums[i] << ',';
+            else
+                cout << nums[i] << ']' << endl;
+        }
 }
