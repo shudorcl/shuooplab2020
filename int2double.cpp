@@ -7,7 +7,7 @@ class Vector
 {
 public:
     //指定向量维数，成员初始化为0
-    Vector(int vdim)
+    Vector(int vdim=1)
     {
         //分配内存
         this->nums = new double(vdim);
@@ -50,7 +50,7 @@ public:
             this->nums[i] = ov.nums[i];
         }
         this->size = ov.size;
-
+        cout << "赋值成功" << endl;
         return *this;
     }
 
@@ -58,7 +58,7 @@ public:
     Vector(Vector &ov)
     {
         //先删除自身资源，再申请新资源
-        if (this->nums)
+        if(nums!=NULL)
             delete[] nums;
         this->nums = new double(ov.size);
 
@@ -67,6 +67,7 @@ public:
         {
             this->nums[i] = ov.nums[i];
         }
+        cout << "拷贝成功！" << endl;
         this->size = ov.size;
     }
     virtual ~Vector()
@@ -368,8 +369,4 @@ private:
 
 int main()
 {
-    Vector v1(1, 1);
-    Vector v2 = v1;
-    v2.show();
-    return 0;
 }
