@@ -101,7 +101,7 @@ double Vector::pop(int index)
     if (this->nums == NULL)
     {
         cout << "This is a empty Vector!" << endl;
-        return NULL;
+        return 0;
     }
 
     //先储存要返回的成员
@@ -175,7 +175,134 @@ void Vector::insert(int index, double new_double)
     //最后更新size
     this->size++;
 }
-Vector Vector::chip(int start, int end, int step)
+/*Vector Vector::chip(int start, int end, int step)
 {
-    
-}
+    //设计成产生一个临时变量赋值时使用
+    Vector tmp((end - start) / step);
+    for (int j = start; j < end; j += step)
+    {
+        tmp.nums[j] = nums[j];
+    }
+    return tmp;
+}*/
+
+//重载运算符
+    Vector Vector::operator+(Vector &ov)
+    {
+        if (this->size != ov.size)
+        {
+            //throw e();
+        }
+
+        Vector temp(this->size);
+        for (int i = 0; i < this->size; i++)
+        {
+            temp.nums[i] = this->nums[i] + ov.nums[i];
+        }
+        return temp;
+    }
+
+    Vector Vector::operator-(Vector &ov)
+    {
+        if (this->size != ov.size)
+        {
+            //throw e();
+        }
+
+        Vector temp(this->size);
+        for (int i = 0; i < this->size; i++)
+        {
+            temp.nums[i] = this->nums[i] - ov.nums[i];
+        }
+        return temp;
+    }
+
+    Vector &Vector::operator+=(Vector &ov)
+    {
+        if (this->size != ov.size)
+        {
+            //throw e();
+        }
+        *this = *this + ov;
+        return *this;
+    }
+    bool Vector::operator!=(Vector &ov)
+    {
+        if (this->size != ov.size)
+        {
+            return true;
+        }
+
+        for (int i; i < size; i++)
+        {
+            if (this->nums[i] != ov.nums[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    ostream &operator<<(ostream &out, const Vector &ov)
+    {
+        for (int i; i < ov.size; i++)
+        {
+            out << ov.nums[i];
+        }
+        return out;
+    }
+    istream &operator>>(istream &in, Vector &ov)
+    {
+        //我也不太会
+    }
+
+    bool Vector::operator==(Vector &ov)
+    {
+        if (this->size != ov.size)
+        {
+            return false;
+        }
+
+        for (int i; i < size; i++)
+        {
+            if (this->nums[i] != ov.nums[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    double Vector::operator*(Vector &ov)
+    {
+        if (this->size != ov.size)
+        {
+            //throw e();
+        }
+
+        double sum = 0;
+        for (int i = 0; i < this->size; i++)
+        {
+            sum += this->nums[i] * ov.nums[i];
+        }
+        return sum;
+    }
+
+    Vector Vector::operator*(double mult)
+    {
+        Vector temp(this->size);
+        for (int i = 0; i < this->size; i++)
+        {
+            temp.nums[i] = this->nums[i] * mult;
+        }
+        return temp;
+    }
+
+    double Vector::operator[](int index)
+    {
+        //异常处理
+        if (index < 0 || index >= this->size)
+        {
+            //throw e();
+        }
+        return this->nums[index];
+    }

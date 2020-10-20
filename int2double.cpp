@@ -7,7 +7,7 @@ class Vector
 {
 public:
     //指定向量维数，成员初始化为0
-    Vector(int vdim=1)
+    Vector(int vdim = 1)
     {
         //分配内存
         this->nums = new double(vdim);
@@ -58,8 +58,6 @@ public:
     Vector(Vector &ov)
     {
         //先删除自身资源，再申请新资源
-        if(nums!=NULL)
-            delete[] nums;
         this->nums = new double(ov.size);
 
         //赋值，并记录size
@@ -230,7 +228,13 @@ public:
     //获得指定部分和步长的切片,默认全部，步长默认为1
     Vector chip(int start, int end, int step)
     {
-        //不太会
+        //设计成产生一个零食变量赋值时使用
+        Vector tmp((end - start) / step);
+        for (int j = start; j < end; j += step)
+        {
+            tmp.nums[j] = nums[j];
+        }
+        return tmp;
     }
     //获得向量维数
     int Getlen()
@@ -369,4 +373,7 @@ private:
 
 int main()
 {
+    Vector v1(100,3);
+    //Vector v2=v1.chip(0, 33, 2);
+    return 0;
 }
