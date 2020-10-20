@@ -10,9 +10,11 @@ String::String(const char *s)
     strcpy(str, s);
     str[strlen(s)] = '\0';
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE);
+    //整活用的更改字体显示
     cout << "A String is constructed.(Method 1)("
          << str << ')' << endl;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    //恢复为黑色
 }
 String::String(const char *s, int n)
 {
@@ -363,13 +365,10 @@ String operator+(const String &Str1, const String &Str2)
     strcat(temp.str, Str2.str);
     return temp;
 }
-void operator+=(String &Str1, const String &Str2)
+String &String::operator+=(const String &Str) //成员函数
 {
-    String temp;
-    temp = new char[strlen(Str1.str) + strlen(Str2.str) + 1];
-    strcpy(temp.str, Str1.str);
-    strcat(temp.str, Str2.str);
-    Str1 = temp;
+    *this = *this + Str;
+    return *this;
 }
 char &String::operator[](int index) const
 {
@@ -390,3 +389,11 @@ char &String::back() const
 {
     return str[strlen(str) - 1];
 }
+char *String::c_str() const
+{
+    return str;
+}
+/*String String::chip(int start, int end, int step = 1) const
+{
+    String temp;
+}*/
