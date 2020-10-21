@@ -73,3 +73,5 @@ public:
     String chip(int start, int end, int step = 1) const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H
+//
+//
