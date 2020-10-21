@@ -42,7 +42,7 @@ double Vector::Modular() const
     }
     return sqrt(sum);
 }
-void Vector::Normalize()
+Vector & Vector::Normalize()
 {
     double mod;
     for (int i = 0; i < size; i++)
@@ -54,6 +54,7 @@ void Vector::Normalize()
     {
         this->nums[i] /= mod;
     }
+    return *this;
 }
 void Vector::Show() const
 {
@@ -127,7 +128,7 @@ double Vector::pop(int index)
     return last;
 }
 
-void Vector::append(double new_double)
+Vector& Vector::append(double new_double)
 {
     //申请新空间
     double *new_nums = new double(this->size + 1);
@@ -147,10 +148,11 @@ void Vector::append(double new_double)
 
     //最后更新size
     this->size++;
+    return *this;
 }
 
 //在指定位置插入成员
-void Vector::insert(int index, double new_double)
+Vector& Vector::insert(int index, double new_double)
 {
     //申请新空间
     double *new_nums = new double(this->size + 1);
@@ -174,6 +176,7 @@ void Vector::insert(int index, double new_double)
 
     //最后更新size
     this->size++;
+    return *this;
 }
 /*Vector Vector::chip(int start, int end, int step)
 {

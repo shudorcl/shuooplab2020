@@ -70,6 +70,6 @@ public:
     char &operator[](int index) const;
     char &front() const;
     char &back() const;
-    String chip(int start, int end, int step = 1) const;
+    //String chip(int start, int end, int step = 1) const;
 };
 #endif //STRING_FUNCTION_STRING_HEAD_H

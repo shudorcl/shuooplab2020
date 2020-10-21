@@ -140,7 +140,7 @@ int String::rfind(const String &Str) const
     return -1;
 }
 
-//the defination of append
+//the definition of append
 String &String::append(const String &s)
 {
     strcat(str, s.str);
@@ -185,7 +185,7 @@ String &String::append(int pos, const char s)
     return *this;
 }
 
-//the functiong of the empty
+//the function of the empty
 bool String::empty() const
 {
     if (str[0] == '\0')
@@ -256,7 +256,7 @@ char *&String::reverse()
     strrev(str);
     return str;
 }
-char *&String::ChineseReverse()
+char *&String::ChineseReverse()//中文反转，因为中文要多占一位
 {
     int length = strlen(str), t = length;
     for (int i = 0; i < length / 2; i += 2, t -= 2)
