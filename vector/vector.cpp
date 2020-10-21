@@ -42,7 +42,7 @@ double Vector::Modular() const
     }
     return sqrt(sum);
 }
-Vector & Vector::Normalize()
+Vector &Vector::Normalize()
 {
     double mod;
     for (int i = 0; i < size; i++)
@@ -128,7 +128,7 @@ double Vector::pop(int index)
     return last;
 }
 
-Vector& Vector::append(double new_double)
+Vector &Vector::append(double new_double)
 {
     //申请新空间
     double *new_nums = new double(this->size + 1);
@@ -152,7 +152,7 @@ Vector& Vector::append(double new_double)
 }
 
 //在指定位置插入成员
-Vector& Vector::insert(int index, double new_double)
+Vector &Vector::insert(int index, double new_double)
 {
     //申请新空间
     double *new_nums = new double(this->size + 1);
@@ -190,122 +190,122 @@ Vector& Vector::insert(int index, double new_double)
 }*/
 
 //重载运算符
-    Vector Vector::operator+(Vector &ov)
+Vector Vector::operator+(Vector &ov)
+{
+    if (this->size != ov.size)
     {
-        if (this->size != ov.size)
-        {
-            //throw e();
-        }
-
-        Vector temp(this->size);
-        for (int i = 0; i < this->size; i++)
-        {
-            temp.nums[i] = this->nums[i] + ov.nums[i];
-        }
-        return temp;
+        //throw e();
     }
 
-    Vector Vector::operator-(Vector &ov)
+    Vector temp(this->size);
+    for (int i = 0; i < this->size; i++)
     {
-        if (this->size != ov.size)
-        {
-            //throw e();
-        }
+        temp.nums[i] = this->nums[i] + ov.nums[i];
+    }
+    return temp;
+}
 
-        Vector temp(this->size);
-        for (int i = 0; i < this->size; i++)
-        {
-            temp.nums[i] = this->nums[i] - ov.nums[i];
-        }
-        return temp;
+Vector Vector::operator-(Vector &ov)
+{
+    if (this->size != ov.size)
+    {
+        //throw e();
     }
 
-    Vector &Vector::operator+=(Vector &ov)
+    Vector temp(this->size);
+    for (int i = 0; i < this->size; i++)
     {
-        if (this->size != ov.size)
-        {
-            //throw e();
-        }
-        *this = *this + ov;
-        return *this;
+        temp.nums[i] = this->nums[i] - ov.nums[i];
     }
-    bool Vector::operator!=(Vector &ov)
+    return temp;
+}
+
+Vector &Vector::operator+=(Vector &ov)
+{
+    if (this->size != ov.size)
     {
-        if (this->size != ov.size)
+        //throw e();
+    }
+    *this = *this + ov;
+    return *this;
+}
+bool Vector::operator!=(Vector &ov)
+{
+    if (this->size != ov.size)
+    {
+        return true;
+    }
+
+    for (int i; i < size; i++)
+    {
+        if (this->nums[i] != ov.nums[i])
         {
             return true;
         }
+    }
+    return false;
+}
 
-        for (int i; i < size; i++)
-        {
-            if (this->nums[i] != ov.nums[i])
-            {
-                return true;
-            }
-        }
+ostream &operator<<(ostream &out, const Vector &ov)
+{
+    for (int i; i < ov.size; i++)
+    {
+        out << ov.nums[i];
+    }
+    return out;
+}
+istream &operator>>(istream &in, Vector &ov)
+{
+    //我也不太会
+}
+
+bool Vector::operator==(Vector &ov)
+{
+    if (this->size != ov.size)
+    {
         return false;
     }
 
-    ostream &operator<<(ostream &out, const Vector &ov)
+    for (int i; i < size; i++)
     {
-        for (int i; i < ov.size; i++)
-        {
-            out << ov.nums[i];
-        }
-        return out;
-    }
-    istream &operator>>(istream &in, Vector &ov)
-    {
-        //我也不太会
-    }
-
-    bool Vector::operator==(Vector &ov)
-    {
-        if (this->size != ov.size)
+        if (this->nums[i] != ov.nums[i])
         {
             return false;
         }
-
-        for (int i; i < size; i++)
-        {
-            if (this->nums[i] != ov.nums[i])
-            {
-                return false;
-            }
-        }
-        return true;
     }
-    double Vector::operator*(Vector &ov)
+    return true;
+}
+double Vector::operator*(Vector &ov)
+{
+    if (this->size != ov.size)
     {
-        if (this->size != ov.size)
-        {
-            //throw e();
-        }
-
-        double sum = 0;
-        for (int i = 0; i < this->size; i++)
-        {
-            sum += this->nums[i] * ov.nums[i];
-        }
-        return sum;
+        //throw e();
     }
 
-    Vector Vector::operator*(double mult)
+    double sum = 0;
+    for (int i = 0; i < this->size; i++)
     {
-        Vector temp(this->size);
-        for (int i = 0; i < this->size; i++)
-        {
-            temp.nums[i] = this->nums[i] * mult;
-        }
-        return temp;
+        sum += this->nums[i] * ov.nums[i];
     }
+    return sum;
+}
 
-    double Vector::operator[](int index)
+Vector Vector::operator*(double mult)
+{
+    Vector temp(this->size);
+    for (int i = 0; i < this->size; i++)
     {
-        //异常处理
-        if (index < 0 || index >= this->size)
-        {
-            //throw e();
-        }
-        return this->nums[index];
+        temp.nums[i] = this->nums[i] * mult;
     }
+    return temp;
+}
+
+double Vector::operator[](int index)
+{
+    //异常处理
+    if (index < 0 || index >= this->size)
+    {
+        //throw e();
+    }
+    return this->nums[index];
+}
