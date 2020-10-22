@@ -19,7 +19,7 @@ public:
     double pop(int index = -1); //获取一个成员并弹出,默认最后一个
     Vector& append(double new_double); //在末尾加上成员
     Vector& insert(int index, double new_double);//在指定位置插入成员
-    //Vector chip(int start, int end, int step=1);//获得指定部分和步长的切片,默认全部，步长默认为1
+    Vector chip(int start, int end, int step=1);//获得指定部分和步长的切片,默认全部，步长默认为1
     //太难了呜呜呜
     //重载运算符
     Vector operator+(Vector &ov);

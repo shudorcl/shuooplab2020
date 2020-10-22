@@ -4,22 +4,23 @@
 using namespace std;
 
 Vector::Vector(int vdim)
-    : nums(new double(vdim)), size(vdim)
+    : nums(new double[vdim]), size(vdim)
 {
     //分配内存
     //初始化，并记录size
     for (int i = 0; i < vdim; i++)
         nums[i] = 0;
+    cout << "Construction Succeed!" << endl;
 }
 Vector::Vector(int vdim, double prim)
-    : nums(new double(vdim)), size(vdim)
+    : nums(new double[vdim]), size(vdim)
 {
     for (int i = 0; i < vdim; i++)
         nums[i] = prim;
 }
 Vector::Vector(const Vector &ov)
 {
-    nums = new double(ov.size);
+    nums = new double[ov.size];
     //赋值，并记录size
     for (int i = 0; i < ov.size; i++)
         nums[i] = ov.nums[i];
@@ -76,7 +77,7 @@ Vector &Vector::operator=(const Vector &ov)
     //先删除自身资源，再申请新资源
     if (this->nums)
         delete[] nums;
-    this->nums = new double(ov.size);
+    this->nums = new double[ov.size];
 
     //赋值，并记录size
     for (int i = 0; i < ov.size; i++)
@@ -109,7 +110,7 @@ double Vector::pop(int index)
     double last = this->nums[this->size - 1];
 
     //再申请内存空间
-    double *new_nums = new double(this->size - 1);
+    double *new_nums = new double[this->size - 1];
 
     //拷贝数据
     for (int i = 0; i < this->size - 1; i++)
@@ -118,7 +119,7 @@ double Vector::pop(int index)
     }
     //指向新内存空间，内存拷贝，再删除new_nums
     delete[] nums;
-    nums = new double(this->size - 1);
+    nums = new double[this->size - 1];
     memcpy(nums, new_nums, this->size);
     delete[] new_nums;
 
@@ -131,7 +132,7 @@ double Vector::pop(int index)
 Vector &Vector::append(double new_double)
 {
     //申请新空间
-    double *new_nums = new double(this->size + 1);
+    double *new_nums = new double[this->size + 1];
 
     //拷贝数据
     for (int i = 0; i < this->size; i++)
@@ -142,7 +143,7 @@ Vector &Vector::append(double new_double)
 
     //指向新内存空间，内存拷贝，再删除new_nums
     delete[] nums;
-    nums = new double(this->size + 1);
+    nums = new double[this->size + 1];
     memcpy(nums, new_nums, this->size);
     delete[] new_nums;
 
@@ -155,7 +156,7 @@ Vector &Vector::append(double new_double)
 Vector &Vector::insert(int index, double new_double)
 {
     //申请新空间
-    double *new_nums = new double(this->size + 1);
+    double *new_nums = new double[this->size + 1];
 
     //和append方法没有本质不同，只需要改变拷贝顺序
     for (int i = 0; i < index; i++)
@@ -170,7 +171,7 @@ Vector &Vector::insert(int index, double new_double)
 
     //指向新内存空间，内存拷贝，再删除new_nums
     delete[] nums;
-    nums = new double(this->size + 1);
+    nums = new double[this->size + 1];
     memcpy(nums, new_nums, this->size);
     delete[] new_nums;
 
@@ -178,7 +179,7 @@ Vector &Vector::insert(int index, double new_double)
     this->size++;
     return *this;
 }
-/*Vector Vector::chip(int start, int end, int step)
+Vector Vector::chip(int start, int end, int step)
 {
     //设计成产生一个临时变量赋值时使用
     Vector tmp((end - start) / step);
@@ -187,7 +188,7 @@ Vector &Vector::insert(int index, double new_double)
         tmp.nums[j] = nums[j];
     }
     return tmp;
-}*/
+}
 
 //重载运算符
 Vector Vector::operator+(Vector &ov)
