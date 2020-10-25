@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
+/*int main()
 {
      String Empty, ZerOne("Zero one"), ArkOne("Ark One Rider", 7), Ark(10, 'A');
      String LiDang("立党老师反转了！");
@@ -39,4 +39,5 @@ int main()
           << "\n back is " << Knight.back()
           << endl;
      return 0;
-}
+}*/
+

@@ -1,57 +1,45 @@
 #include "String.h"
-#include "windows.h"
-#include <cstring>
+#include <string.h>
 #include <iostream>
+#include <string>
 using namespace std;
 //rcl's construc func
 String::String(const char *s)
 {
+    //use the entered character as the value of Str of the data member of the target object
     str = new char[strlen(s) + 1];
     strcpy(str, s);
     str[strlen(s)] = '\0';
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE);
-    //整活用的更改字体显示
-    cout << "A String is constructed.(Method 1)("
+    cout << "A String is constructed.("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-    //恢复为黑色
 }
-String::String(const char *s, int n)
+String::String(const char *s, unsigned long n)
 {
+    //take n characters of the input string as the value of Str of the data member of the target object
     if (strlen(s) < n)
         str = new char[strlen(s) + 1];
     else
         str = new char[n + 1];
     strcpy(str, s);
     str[n] = '\0';
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
     cout << "A String is constructed.(Method 2)("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 String::String(int n, char c)
 {
+    //repeat the input character n times as the value of Str of the data member of the target object
     int i;
     str = new char[n + 1];
     for (i = 0; i < n; i++)
         str[i] = c;
     str[n] = '\0';
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);
     cout << "A String is constructed.(Method 3)("
          << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
-String::String(const String &Str)
-{
-    str = new char[strlen(Str.str) + 1];
-    strcpy(str, Str.str);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);
-    cout << "A String is constructed.(Method copy)("
-         << str << ')' << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-}
+
 String::String(const String &Str, int pos, int n)
 {
+    //take n characters from a certain position (pos) from the value of str in the data member of the reference object as the value of Str of the data member of the target object
     int i, m;
     m = (int)strlen(Str.str);
     if (pos > m)
@@ -72,6 +60,14 @@ String::String(const String &Str, int pos, int n)
          << str << ')' << endl;
 }
 
+String::String(const String &Str)
+{
+    //use the value of str in the data member of the input object as the value of Str in the data member of the target object
+    str = new char[strlen(Str.str) + 1];
+    strcpy(str, Str.str);
+    cout << "A String is constructed.(Method copy)("
+         << str << ')' << endl;
+}
 String::~String()
 {
     static int DestructCount = 0;
@@ -84,18 +80,18 @@ String::~String()
 
     cout << '(' << DestructCount << ')' << endl;
 }
-int String::length() const
+unsigned long String::length() const
 {
     return strlen(str);
 }
-int String::size() const
+unsigned long String::size() const
 {
     return strlen(str);
 }
 //rcl's official work
-int String::find(const String &Str) const
+long String::find(const String &Str) const
 {
-    int i, j, m, n, flag;
+    unsigned long i, j, m, n, flag;
     m = strlen(Str.str);
     n = strlen(str);
     if (m > n)
@@ -116,9 +112,9 @@ int String::find(const String &Str) const
     }
     return -1;
 }
-int String::rfind(const String &Str) const
+long String::rfind(const String &Str) const
 {
-    int i, j, m, n, flag;
+    unsigned long i, j, m, n, flag;
     m = strlen(Str.str);
     n = strlen(str);
     if (m > n)
@@ -143,17 +139,20 @@ int String::rfind(const String &Str) const
 //the defination of append
 String &String::append(const String &s)
 {
+    //Directly splice the str value of the data member of the incoming object to the back of the str of the target data member
+    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target data member:"<<endl;
     strcat(str, s.str);
     m_str += strlen(s.str);
     return *this;
 }
 
-String &String::append(const String &s, int pos, int n)
+String &String::append(const String &s, unsigned long pos, unsigned long n)
 {
-    //setting the begin and the lens of the target
+    //Cut a certain number (n) of characters from a certain position (pos) of the str value of the data member of the incoming object to splice behind the str of the target object data member
+    cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
     char temp[100];
     int k = 0;
-    for (int i = pos; i < n + pos; i++)
+    for (unsigned long i = pos; i < n + pos; i++)
     {
         temp[k] = s.str[i];
         k++;
@@ -166,16 +165,20 @@ String &String::append(const String &s, int pos, int n)
 
 String &String::append(const char *s)
 {
+    //Splice the incoming string directly behind the str of the object data member
+    cout<<"Splice the incoming string directly behind the str of the object data member:"<<endl;
     strcat(str, s);
     m_str += strlen(s);
     return *this;
 }
 
-String &String::append(int pos, const char s)
+String &String::append(int num, const char s)
 {
+    //Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member
+    cout<<"Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member:"<<endl;
     char p_temp[100];
     int i = 0;
-    for (i = 0; i < pos; i++)
+    for (i = 0; i < num; i++)
     {
         p_temp[i] = s;
     }
@@ -235,6 +238,15 @@ String &String::swap(const String &s)
     strcpy(str, p_temp);
     return *this;
 }
+String &String::swap(String &s)
+{
+    char p_temp[100];
+    int size = (int)strlen(s.str);
+    strcpy(p_temp, s.str);
+    p_temp[size] = '\0';
+    strcpy(str, p_temp);
+    return *this;
+}
 //the function of clear
 void String::clear()
 {
@@ -251,14 +263,19 @@ void String::pop_back()
     *p = '\0';
 }
 //Maybe we should use strrev...
-char *&String::reverse()
+
+char* &String::reverse()
 {
-    strrev(str);
+    int first, last;
+       first = 0;
+       last = (int)strlen(str);
+       while ((first != last) && (first != --last))
+           std::swap(str[first++], str[last]);
     return str;
 }
 char *&String::ChineseReverse()
 {
-    int length = strlen(str), t = length;
+	long length = strlen(str), t = length;
     for (int i = 0; i < length / 2; i += 2, t -= 2)
     {
         int ret = str[i];
@@ -376,9 +393,9 @@ char &String::operator[](int index) const
 }
 void String::Show() const
 {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
+
     cout << str << endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 }
 
 char &String::front() const

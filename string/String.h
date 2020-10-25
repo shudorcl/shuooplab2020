@@ -1,6 +1,7 @@
 #ifndef STRING_FUNCTION_STRING_HEAD_H
 #define STRING_FUNCTION_STRING_HEAD_H
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 class String
@@ -11,7 +12,7 @@ private:
 public:
     //char *str;
     String(const char *s = "");
-    String(const char *s, int n);
+    String(const char *s, unsigned long n);
     String(int n, char c);
     String(const String &Str);
     String(const String &Str, int pos, int n);
@@ -21,9 +22,9 @@ public:
     //workingspace for sunyiyan
     //the defination of append
     String &append(const String &s);
-    String &append(const String &s, int pos, int n);
+    String &append(const String &s, unsigned long pos, unsigned long n);
     String &append(const char *s);
-    String &append(int pos, const char s);
+    String &append(int num, const char s);
     //the functiong of the empty
     bool empty() const;
     //the defination of insert
@@ -35,6 +36,7 @@ public:
     //the function of swap
     String &swap(const char *s);
     String &swap(const String &s);
+	String &swap(String &s);
     //the defination of clear
     void clear();
     //the defination of pop_back
@@ -42,12 +44,12 @@ public:
     //the defination of reverse
     void Show() const;
     String &operator=(const String &Str);
-    //String Function
-    int length() const;
-    int size() const;
-    int find(const String &Str) const;
-    int rfind(const String &Str) const;
-    void swap(String &Str);
+    //String Function rcl
+    unsigned long length() const;
+    unsigned long size() const;
+	long find(const String &Str) const;
+	long rfind(const String &Str) const;
+    //void swap(String &Str);
     char *&reverse();
     char *&ChineseReverse();
     void uppercase(String &Str);

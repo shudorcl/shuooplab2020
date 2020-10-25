@@ -3,7 +3,7 @@
 //  string
 //
 //  Created by SUNYIYAN on 2020/9/30.
-//  Copyright © 2020 SUNYIYAN. All rights reserved.
+//  Copyright  2020 SUNYIYAN. All rights reserved.
 //
 
 
@@ -13,20 +13,55 @@
 
 using namespace std;
 
-int main()
+void test1()
+{
+	cout<<"\n-------------------------------------------TEST THE FOUR BASIC FUNCTIONS-----------------------------------";
+    cout<<"\n\n--------------------------CONSTRUCT--------------------------"<<endl;
+    cout<<"\nNo parameter structure: "<<endl;
+    cout<<"---CODE---(String C1;)\n"<<endl;
+    String C1;
+    cout<<"\n-----------------------CONVERTING CONSTRUCT--------------------"<<endl;
+    cout<<"\nParametric structure: "<<endl;
+    
+    cout<<"\n1.use the entered character as the value of Str of the data member of the target object: "<<endl;
+    cout<<"---CODE---(String C2=\"nice to see you\";)\n"<<endl;
+    String C2="nice to see you";
+    
+    cout<<"\n2.take n characters of the input string as the value of Str of the data member of the target object: "<<endl;
+    cout<<"---CODE---(String C3(\"nice to see you!\",16);)\n"<<endl;
+    String C3("nice to see you!",16);
+    cout<<"\n3.repeat the input character n times as the value of Str of the data member of the target object: "<<endl;
+    cout<<"---CODE---(String C4(10,'S');)\n"<<endl;
+    String C4(10,'S');
+    cout<<"\n4.take n characters from a certain position (pos) from the value of str in the data member of the reference object as the value of Str of the data member of the target object: "<<endl;
+    cout<<"---CODE---(String C5(C4,5,5);)\n"<<endl;
+    String C5(C4,5,5);
+	cout<<"\n------------------------------COPY------------------------------"<<endl;
+    cout<<"\n5.use the value of str in the data member of the input object as the value of Str in the data member of the target object: "<<endl;
+    cout<<"---CODE---(String C6(C4);)\n"<<endl;
+    String C6(C4);
+    cout<<"\n----------------------------DESTRUCT----------------------------\n"<<endl;
+}
+
+void test2()
 {
     //test for append
-    String s1 = "ababaaabg";
+    cout<<"\n------------------------------------------------THE TEST OF APPEND------------------------------------------------------"<<endl;
+    String s1 = "A ";
+    String str2="BBBBBBBBBB ";
+    cout<<"-------------------------------------------------------------------"<<endl;
+    s1.append("AAAAAAAAAA ");
     s1.Show();
-    String str2="printjjjjjjjjjjj";
-    s1.append("Writing ");      // "Writing "
+    cout<<"-------------------------------------------------------------------"<<endl;
+    s1.append(str2,6,3);
     s1.Show();
-    s1.append(str2,6,3);        // "10 "
-    s1.Show();
+    cout<<"-------------------------------------------------------------------"<<endl;
     s1.append(str2);
     s1.Show();
-    s1.append(5,'w');
+    cout<<"-------------------------------------------------------------------"<<endl;
+    s1.append(4,'C');
     s1.Show();
+	cout<<"\n-----------------------------------------------------------------------------------------------------------------------"<<endl;
     //test for empty
     String s2= "ffaffafafaaffaf";
     cout<<s2.empty()<<endl;
@@ -62,5 +97,27 @@ int main()
     String s9="please reverse it";
     s9.reverse();
     s9.Show();
+}
+
+int main()
+{
+    int n;
+    cout<<"--------------------------------------------CLASS STRING FUNCTIONS TEST------------------------------------"<<endl;
+    cout<<"[0] Quit"<<endl;
+    cout<<"[1] Test the four basic functions"<<endl;
+    cout<<"[2] Test access to class objects"<<endl;
+    cout<<"[3] String modification operation"<<endl;
+    cout<<"[4] Test overloaded relational operators"<<endl;
+    cout<<"-----------------------------------------------------------------------------------------------------------\n"<<endl;
+    while(1)
+    {
+        cout<<"Please enter a number:";
+        cin>>n;
+        if(n==0) break;
+        else if(n==1) test1();
+        else if(n==2) test2();
+        //else if(n==3) test03();
+        //else if(n==4) test04();
+    }
     return 0;
 }
