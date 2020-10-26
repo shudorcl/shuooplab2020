@@ -28,15 +28,15 @@ public:
     //the functiong of the empty
     bool empty() const;
     //the defination of insert
-    String &insert(int p0, const char *s);
+    String &insert(int pos, const char *s);
     String &insert(int idx, const String &str, int str_idx, int str_num);
     String &insert(int __pos, const char *__s, int __n);
     //the defination of the substr
     String substr(int pos, int n);
     //the function of swap
-    String &swap(const char *s);
+    String &swap(char *s);
     String &swap(const String &s);
-	String &swap(String &s);
+	//String &swap(String &s);
     //the defination of clear
     void clear();
     //the defination of pop_back

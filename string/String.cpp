@@ -136,12 +136,16 @@ long String::rfind(const String &Str) const
 }
 
 //the defination of append
-String &String::append(const String &s)
+String &String::append(const char *s)
 {
-    //Directly splice the str value of the data member of the incoming object to the back of the str of the target data member
-    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target data member:"<<endl;
-    strcat(str, s.str);
-    m_str += strlen(s.str);
+    //Splice the incoming string directly behind the str of the object data member
+    cout<<"Splice the incoming string directly behind the str of the object data member:"<<endl;
+    char temp[100];
+    strcpy(temp,str);
+    strcat(temp,s);
+    str=new char[m_str+strlen(s)];
+    strcpy(str, temp);
+    m_str += strlen(s);
     return *this;
 }
 
@@ -149,25 +153,41 @@ String &String::append(const String &s, unsigned long pos, unsigned long n)
 {
     //Cut a certain number (n) of characters from a certain position (pos) of the str value of the data member of the incoming object to splice behind the str of the target object data member
     cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
-    char temp[100];
-    int k = 0;
-    for (unsigned long i = pos; i < n + pos; i++)
+    char temp[1024];
+    int num;
+    num=(int)strlen(str);
+    strcpy(temp,str);
+    for(unsigned long i=pos;i<pos+n;i++)
     {
-        temp[k] = s.str[i];
-        k++;
+        temp[num]=s.str[i];
+        num++;
     }
-    temp[k] = '\0';
-    strcat(str, temp);
-    m_str += strlen(temp);
+    temp[num]='\0';
+    str=new char[m_str+n];
+    strcpy(str,temp);
     return *this;
 }
 
-String &String::append(const char *s)
+//the functiong of the empty
+bool String::empty() const
 {
-    //Splice the incoming string directly behind the str of the object data member
-    cout<<"Splice the incoming string directly behind the str of the object data member:"<<endl;
-    strcat(str, s);
-    m_str += strlen(s);
+    // determine whether str in the data member of the target object is empty
+    if (str[0] == '\0')
+        return true;
+    else
+        return false;
+}
+
+String &String::append(const String &s)
+{
+    //Directly splice the str value of the data member of the incoming object to the back of the str of the target data member
+    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target data member:"<<endl;
+    char temp[1024];
+    strcpy(temp, str);
+    strcat(temp, s.str);
+    str=new char[strlen(str)+strlen(s.str)];
+    strcpy(str,temp);
+    m_str += strlen(s.str);
     return *this;
 }
 
@@ -176,37 +196,31 @@ String &String::append(int num, const char s)
     //Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member
     cout<<"Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member:"<<endl;
     char p_temp[100];
-    int i = 0;
-    for (i = 0; i < num; i++)
+    strcpy(p_temp,str);
+    int i =(int)strlen(str);
+    for (; i<num; i++)
     {
         p_temp[i] = s;
     }
     p_temp[i] = '\0';
-    strcat(str, p_temp);
-    m_str += strlen(p_temp);
+    str=new char[strlen(str)+num];
+    strcpy(str,p_temp);
+    m_str += num;
     return *this;
 }
 
-//the functiong of the empty
-bool String::empty() const
-{
-    if (str[0] == '\0')
-        return true;
-    else
-        return false;
-}
-
 //the function of insert
-String &String::insert(int p0, const char *s)
+String &String::insert(int pos, const char *s)
 {
+    //insert the input character from a certain position (pos) of str in the data member of the target object
     int n = (int)strlen(str);
-    if (p0 > n)
-        p0 = n;
+    if (pos > n)
+        pos = n;
     char *p = new char[strlen(str) + strlen(s) + 1];
-    strncpy(p, str, p0);
-    p[p0] = '\0';
+    strncpy(p, str, pos);
+    p[pos] = '\0';
     strcat(p, s);
-    strcat(p, str + p0);
+    strcat(p, str + pos);
     delete[] str;
     str = p;
     return *this;
@@ -215,21 +229,27 @@ String &String::insert(int p0, const char *s)
 //the function of substr
 String String::substr(int pos, int n)
 {
+    //Extract n characters from a position (pos) of str in the data member of the target object
     String temp(*this, pos, n);
     return temp;
 }
 //the function of swap
-String &String::swap(const char *s)
+String &String::swap(char *s)
 {
+    //Swap the str in the data member of the target object with the input string
+    cout<<"Swap the str in the data member of the target object with the input string: "<<endl;
     char p_temp[100];
     int size = (int)strlen(s);
     strcpy(p_temp, s);
     p_temp[size] = '\0';
+    str=new char[size];
     strcpy(str, p_temp);
     return *this;
 }
 String &String::swap(const String &s)
 {
+    //Swap the str in the data member of the target object with the str in the data member of the input object
+    cout<<"Swap the str in the data member of the target object with the str in the data member of the input object: "<<endl;
     char p_temp[100];
     int size = (int)strlen(s.str);
     strcpy(p_temp, s.str);
@@ -237,24 +257,18 @@ String &String::swap(const String &s)
     strcpy(str, p_temp);
     return *this;
 }
-String &String::swap(String &s)
-{
-    char p_temp[100];
-    int size = (int)strlen(s.str);
-    strcpy(p_temp, s.str);
-    p_temp[size] = '\0';
-    strcpy(str, p_temp);
-    return *this;
-}
+
 //the function of clear
 void String::clear()
 {
-    char *p = str;
-    *p = '\0';
+    //Clear the value of str in the data member of the target object
+    str=new char[1];
+    str[0] = '\0';
 }
 //the function of pop_back
 void String::pop_back()
 {
+    //Delete the last character of str in the data member of the target object
     char *p = str;
     while (*p != '\0')
         p++;
