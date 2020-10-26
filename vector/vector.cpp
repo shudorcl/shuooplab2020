@@ -251,10 +251,10 @@ void Vector::insert(int index, double new_double)
         }
         return out;
     }
-    istream &operator>>(istream &in, Vector &ov)
+   /* istream &operator>>(istream &in, Vector &ov)
     {
         //我也不太会
-    }
+    }*/
 
     bool Vector::operator==(Vector &ov)
     {

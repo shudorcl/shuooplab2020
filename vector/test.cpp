@@ -12,6 +12,7 @@ int main()
     Vector v3 = v2;
     v3.Show();
     Vector v4(100, 1);
+    v4.Show();
     //v4.chip(0, 33, 2);
     v3.Show();
     return 0;
