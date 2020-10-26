@@ -160,6 +160,99 @@ void test3()
     cout<<"\n---CODE---(s9.reverse();)\n"<<endl;
     s9.reverse();
     s9.Show();
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------CHINESE_RESERVE-----------------------------"<<endl;
+    //test for reverse
+    cout<<"---CODE---(String s10=\"\";)\n"<<endl;
+    String s10="";
+    cout<<"\n---CODE---(s10.ChineseReverse();)\n"<<endl;
+    s10.ChineseReverse();
+    s10.Show();
+    cout<<"\n\n------------------------------DESTRUCT-----------------------------\n"<<endl;
+}
+void test4()
+{
+    cout<<"\n-------------------------------------------TEST OVERLOADED RELATIONAL OPERATORs------------------------------------";
+    cout<<"\n\n------------------------TEST OPERATOR '=' -------------------------"<<endl;
+    cout<<"---CODE---(String L1=\"Waiting to be copied\";)"<<endl;
+    String L1="Waiting to be copied";
+    cout<<"\n---CODE---(String L2=L1;)"<<endl;
+    String L2=L1;
+    cout<<endl;
+    L2.Show();
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------TEST OPERATOR '==' -------------------------"<<endl;
+    cout<<"---CODE---(String L3=\"This is a normal string\";)"<<endl;
+    String L3="This is a normal string";
+    cout<<"\n---CODE---(String L4=\"This is a normal string\";)"<<endl;
+    String L4="This is a normal string";
+    cout<<"\n---CODE---(int Judge=(L3==L4);)"<<endl;
+    int Judge=(L3==L4);
+    cout<<"Judge: "<<Judge<<endl;
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------TEST OPERATOR '!=' -------------------------"<<endl;
+    cout<<"---CODE---(String L5=\"This is a normal string\";)"<<endl;
+    String L5="This is a normal string";
+    cout<<"\n---CODE---(String L6=\"This isn't a normal string\";)"<<endl;
+    String L6="This isn't a normal string";
+    cout<<"\n---CODE---(int Judge=(L5!=L6);)"<<endl;
+    Judge=(L5!=L6);
+    cout<<"Judge: "<<Judge<<endl;
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n------------------------TEST OPERATOR '>' -------------------------"<<endl;
+    cout<<"---CODE---(String L7=\"This is a longlong string\";)"<<endl;
+    String L7="This is a longlong string";
+    cout<<"\n---CODE---(String L8=\"This isn't a short string\";)"<<endl;
+    String L8="This isn't a short string";
+    cout<<"\n---CODE---(int Judge=(L7>L8);)"<<endl;
+    Judge=(L7>L8);
+    cout<<"Judge: "<<Judge<<endl;
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------TEST OPERATOR '>=' -------------------------"<<endl;
+    cout<<"---CODE---(String L9=\"This is a longlong string\";)"<<endl;
+    String L9="This is a longlong string";
+    cout<<"\n---CODE---(String L10=\"This isn't a short string\";)"<<endl;
+    String L10="This isn't a short string";
+    cout<<"\n---CODE---(int Judge=(L9>=L10);)"<<endl;
+    Judge=(L9>=L10);
+    cout<<"Judge: "<<Judge<<endl;
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n------------------------TEST OPERATOR '<' -------------------------"<<endl;
+    cout<<"---CODE---(String L11=\"This is a longlong string\";)"<<endl;
+    String L11="This is a longlong string";
+    cout<<"\n---CODE---(String L12=\"This isn't a short string\";)"<<endl;
+    String L12="This isn't a short string";
+    cout<<"\n---CODE---(int Judge=(L11<L12);)"<<endl;
+    Judge=(L11<L12);
+    cout<<"Judge: "<<Judge<<endl;
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------TEST OPERATOR '<=' -------------------------"<<endl;
+    cout<<"---CODE---(String L13=\"This is a longlong string\";)"<<endl;
+    String L13="This is a longlong string";
+    cout<<"\n---CODE---(String L14=\"This isn't a short string\";)"<<endl;
+    String L14="This isn't a short string";
+    cout<<"\n---CODE---(int Judge=(L13<=L14);)"<<endl;
+    Judge=(L13>=L14);
+    cout<<"Judge: "<<Judge<<endl;
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------TEST OPERATOR '+' --------------------------"<<endl;
+    cout<<"---CODE---(String L15=\"AAAAA\";)"<<endl;
+    String L15="AAAAA";
+    cout<<"\n---CODE---(String L16=\"BBBBB\";)"<<endl;
+    String L16="BBBBB";
+    cout<<"\n---CODE---(String L17(L15+L16);)"<<endl;
+    String L17(L15+L16);
+    L17.Show();
+    cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"\n\n-----------------------TEST OPERATOR '+=' -------------------------"<<endl;
+    cout<<"---CODE---(String L18=\"AAAAA\";)"<<endl;
+    String L18="AAAAA";
+    cout<<"\n---CODE---(String L19=\"BBBBB\";)"<<endl;
+    String L19="BBBBB";
+    cout<<"\n---CODE---(L18+=L19;)"<<endl;
+    L18+=L19;
+    L18.Show();
+    cout<<"-------------------------------------------------------------------"<<endl;
     cout<<"\n\n------------------------------DESTRUCT-----------------------------\n"<<endl;
 }
 int main()
@@ -180,7 +273,7 @@ int main()
         else if(n==1) test1();
         else if(n==2) test2();
         else if(n==3) test3();
-        //else if(n==4) test04();
+        else if(n==4) test4();
     }
     return 0;
 }

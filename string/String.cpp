@@ -279,6 +279,7 @@ void String::pop_back()
 
 char* &String::reverse()
 {
+    //Reverse str in the data member of the target object
     int first, last;
        first = 0;
        last = (int)strlen(str);
@@ -288,6 +289,7 @@ char* &String::reverse()
 }
 char *&String::ChineseReverse()
 {
+    //Reverse str（Chinese）in the data member of the target object
 	long length = strlen(str), t = length;
     for (int i = 0; i < length / 2; i += 2, t -= 2)
     {
@@ -301,7 +303,7 @@ char *&String::ChineseReverse()
     }
     return str;
 }
-char *&String::copy(const String &Str)
+/*char *&String::copy(const String &Str)
 {
     strcpy(str, Str.str);
     return str;
@@ -321,7 +323,7 @@ char *&String::ncatenate(const String &Str, int n)
 {
     strncat(str, Str.str, n);
     return str;
-}
+}*/
 String &String::operator=(const String &Str)
 {
     if (this == &Str)
@@ -373,6 +375,7 @@ bool operator<=(const String &Str1, const String &Str2)
     else
         return false;
 }
+
 ostream &operator<<(ostream &out, const String &Str)
 {
     out << Str.str;
@@ -387,15 +390,15 @@ istream &operator>>(istream &in, String &Str)
     return in;
 }
 
-String operator+(const String &Str1, const String &Str2)
+String operator+(const String &str1,const String &str2)
 {
     String temp;
-    temp = new char[strlen(Str1.str) + strlen(Str2.str) + 1];
-    strcpy(temp.str, Str1.str);
-    strcat(temp.str, Str2.str);
+    temp.str=new char[strlen(str1.str)+strlen(str2.str)+1];
+    strcpy(temp.str,str1.str);
+    strcat(temp.str,str2.str);
     return temp;
 }
-String &String::operator+=(const String &Str) //成员函数
+String &String::operator+=(const String &Str) 
 {
     *this = *this + Str;
     return *this;
@@ -406,9 +409,7 @@ char &String::operator[](int index) const
 }
 void String::Show() const
 {
-
     cout << str << endl;
-
 }
 
 char &String::front() const

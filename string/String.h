@@ -59,6 +59,7 @@ public:
     char *&catenate(const String &Str);
     char *&ncatenate(const String &Str, int n);
     char *c_str() const;
+    //friend String operator=(const char*s);
     friend String operator+(const String &Str1, const String &Str2);
     String &operator+=(const String &Str);
     friend bool operator==(const String &Str1, const String &Str2);
