@@ -428,5 +428,3 @@ char *String::c_str() const
 {
     String temp;
 }*/
-//fresh
-//FRESH
