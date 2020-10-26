@@ -16,7 +16,7 @@ using namespace std;
 void test1()
 {
 	cout<<"\n-------------------------------------------TEST THE FOUR BASIC FUNCTIONS-----------------------------------";
-    cout<<"\n\n--------------------------CONSTRUCT--------------------------"<<endl;
+    cout<<"\n\n---------------------------CONSTRUCT---------------------------"<<endl;
     cout<<"\nNo parameter structure: "<<endl;
     cout<<"---CODE---(String C1;)\n"<<endl;
     String C1;
@@ -45,8 +45,27 @@ void test1()
 
 void test2()
 {
+    cout<<"\n-------------------------------------------TEST ACCESS TO CLASS OBJECTS------------------------------------";
+    cout<<"\n\n--------------------------LENGTH--------------------------"<<endl;
+    String L="LLLLLLLLENGTH";
+    cout<<"\n---CODE---(L.length())\n"<<endl;
+    cout<<"the length of String L: "<<L.length()<<endl;
+    cout<<"\n---------------------------FIND---------------------------"<<endl;
+    String F1="FIND";
+    String F2="N";
+    cout<<"\n---CODE---(F1.find(F2))\n"<<endl;
+    cout<<"Whether there is a character matching F2 in F1 and the Position: "<<F1.find(F2)<<endl<<endl;
+    String F3="RIGHT";
+    String F4="I";
+    cout<<"\n---CODE---(F1.rfind(F2))\n"<<endl;
+    cout<<"Whether there is a character matching F3 in F4 and the Position: "<<F3.find(F4)<<endl;
+    cout<<"\n--------------------------DESTRUCT------------------------\n"<<endl;
+}
+void test3()
+{
+    cout<<"\n-------------------------------------------TEST ACCESS TO CLASS OBJECTS------------------------------------";
+    cout<<"\n\n--------------------------LENGTH--------------------------"<<endl;
     //test for append
-    cout<<"\n------------------------------------------------THE TEST OF APPEND------------------------------------------------------"<<endl;
     String s1 = "A ";
     String str2="BBBBBBBBBB ";
     cout<<"-------------------------------------------------------------------"<<endl;
@@ -61,7 +80,7 @@ void test2()
     cout<<"-------------------------------------------------------------------"<<endl;
     s1.append(4,'C');
     s1.Show();
-	cout<<"\n-----------------------------------------------------------------------------------------------------------------------"<<endl;
+    cout<<"\n-----------------------------------------------------------------------------------------------------------------------"<<endl;
     //test for empty
     String s2= "ffaffafafaaffaf";
     cout<<s2.empty()<<endl;
@@ -98,25 +117,24 @@ void test2()
     s9.reverse();
     s9.Show();
 }
-
 int main()
 {
     int n;
-    cout<<"--------------------------------------------CLASS STRING FUNCTIONS TEST------------------------------------"<<endl;
-    cout<<"[0] Quit"<<endl;
-    cout<<"[1] Test the four basic functions"<<endl;
-    cout<<"[2] Test access to class objects"<<endl;
-    cout<<"[3] String modification operation"<<endl;
-    cout<<"[4] Test overloaded relational operators"<<endl;
-    cout<<"-----------------------------------------------------------------------------------------------------------\n"<<endl;
     while(1)
     {
+        cout<<"\n--------------------------------------------CLASS STRING FUNCTIONS TEST------------------------------------"<<endl;
+        cout<<"[0] Quit"<<endl;
+        cout<<"[1] Test the four basic functions"<<endl;
+        cout<<"[2] Test access to class objects"<<endl;
+        cout<<"[3] String modification operation"<<endl;
+        cout<<"[4] Test overloaded relational operators"<<endl;
+        cout<<"-----------------------------------------------------------------------------------------------------------\n"<<endl;
         cout<<"Please enter a number:";
         cin>>n;
         if(n==0) break;
         else if(n==1) test1();
         else if(n==2) test2();
-        //else if(n==3) test03();
+        else if(n==3) test3();
         //else if(n==4) test04();
     }
     return 0;

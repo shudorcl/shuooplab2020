@@ -82,15 +82,13 @@ String::~String()
 }
 unsigned long String::length() const
 {
-    return strlen(str);
-}
-unsigned long String::size() const
-{
+    //returns the length of Str in the data member of the target object
     return strlen(str);
 }
 //rcl's official work
 long String::find(const String &Str) const
 {
+    //find whether there are characters in str in the data member of the target object that match the str in the data member of the input object
     unsigned long i, j, m, n, flag;
     m = strlen(Str.str);
     n = strlen(str);
@@ -114,6 +112,7 @@ long String::find(const String &Str) const
 }
 long String::rfind(const String &Str) const
 {
+    //Start from the right to find out whether there is a character matching str in the data member of the input object in the str in the data member of the target object
     unsigned long i, j, m, n, flag;
     m = strlen(Str.str);
     n = strlen(str);
