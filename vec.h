@@ -15,7 +15,6 @@ private:
     int size;
 public:
     //构造函数和析构函数
-    Vector(){}
     Vector(int vdim=1);
     Vector(T para,int vdim);
     Vector(const Vector &ve);
@@ -24,25 +23,24 @@ public:
     bool empty()const;//判断空向量
     T module()const;//求模长
     void normalize();//单位化
-    T get(int i=0);//获得指定位置成员,默认第一个
-    T pop(int i=-1);//取出指定位置成员，默认最后一个
-    void append(T in);//在末尾添加元素
-    void insert(int index,T in);//在指定位置添加元素
     //运算符的重载
-    Vector operator+(const Vector<T> &ve);
-    Vector operator+(T &s);
-    friend Vector operator+(T &s,const Vector<T> &ve){return ve+s;}
+    Vector operator+(const Vector<T> &ve)throw(int);//向量与向量相加
+    Vector operator+(const T s);
+    friend Vector operator+(const T s,Vector<T> &ve){return ve+s;}//+友元函数
     Vector operator-(const Vector<T> &ve);
-    Vector & operator+=(Vector<T> &ve);
-    Vector & operator+=(T &s);
+    Vector & operator+=(Vector<T> &ve)throw(int);
+    Vector & operator+=(const T s);
     Vector & operator=(const Vector<T> & ve);
     bool operator!=(const Vector<T> &ve);
     bool operator==(const Vector<T> &ve);
-    Vector operator*(const Vector<T> &ve);
-    Vector operator*(T &s);
-    friend Vector operator*(T &s,const Vector<T>&ve){return ve*s;}
-    Vector & operator*=(const T &n);
-    T operator[](int index);
+    Vector operator*(const Vector<T> &ve)throw(int);
+    Vector operator*(const T s);
+    friend Vector operator*(const T s,Vector<T>&ve)
+    {
+        return ve*s;
+    }
+    Vector & operator*=(const T n);
+    T operator[](const int index)throw(int);
     friend ostream & operator<<(ostream &out,const Vector<T> &ve)//重载输出流
     {
         out<<"[ ";
@@ -55,7 +53,6 @@ public:
         return out;
     }
 };
-
 
 template <typename T>
 Vector<T>::Vector(int vdim) :num(new T[size]),size(vdim)//构造一个默认初始化为0的向量
@@ -88,22 +85,19 @@ Vector<T>::~Vector()
 //运算符重载
 
 template<typename T>
-Vector<T> Vector<T>::operator+(const Vector<T> & ve)//重载+运算符-向量相加
+Vector<T> Vector<T>::operator+(const Vector<T> & ve)throw(int)//重载+运算符-向量相加
 {
-    try{
         if(this->size!=ve.size)
             throw 1;
         Vector<T> sum(size);
         for(int i=0;i<this->size;i++) {
-            sum.num[i]=this->num[i] += ve.num[i];
+            sum.num[i]=this->num[i] + ve.num[i];
         }
         return sum;
-    } catch (int) {
-        cout<<"The sizes of two vectors are different! "<<endl;//异常处理
-    }
+
 }
 template <typename T>
-Vector<T> Vector<T>::operator+(T &s)//重载向量与数相加
+Vector<T> Vector<T>::operator+(const T s)//重载向量与数相加
 {
     Vector<T> sum(size);
     for(int i=0;i<size;i++)
@@ -112,14 +106,18 @@ Vector<T> Vector<T>::operator+(T &s)//重载向量与数相加
 }
 
 template <typename T>
-Vector<T> & Vector<T>::operator+=(Vector<T> &ve)//重载向量+=向量
+Vector<T> & Vector<T>::operator+=(Vector<T> &ve)throw(int)//重载向量+=向量
 {
+
+    if(this->size!=ve.size)
+        throw (int)1;
     for(int i=0;i<this->size;i++)
         this->num[i]=this->num[i]+ve.num[i];
     return *this;
+
 }
 template <typename T>
-Vector<T> & Vector<T>::operator+=(T &s)//重载向量+=数值
+Vector<T> & Vector<T>::operator+=(const T s)//重载向量+=数值
 {
     for(int i=0;i<size;i++)
         this->num[i]=this->num[i]+s;
@@ -127,32 +125,28 @@ Vector<T> & Vector<T>::operator+=(T &s)//重载向量+=数值
 }
 
 template <typename T>
-Vector<T> Vector<T>::operator*(const Vector<T> &ve)//重载向量对应元素*
+Vector<T> Vector<T>::operator*(const Vector<T> &ve) throw(int)//重载点乘
 {
-    try{
-        if(this->size!=ve.size)
-            throw 1;
-        Vector<T> mul(size);
-        for(int i=0;i<size;i++)
-        {
-            mul.num[i]=this->num[i]*ve.num[i];
-        }
-        return mul;
-    }catch(int){
-        cout<<"This sizes of two vectors are different! "<<endl;
+    if(this->size!=ve.size)
+        throw (int)1;
+    Vector<T> mul(size);
+    for(int i=0;i<size;i++)
+    {
+        mul.num[i]=this->num[i]*ve.num[i];
     }
+    return mul;
 }
 template <typename T>
-Vector<T> Vector<T>::operator*(T &s)//重载向量*一个数值
+Vector<T> Vector<T>::operator*(const T s)//重载向量*一个数值
 {
     Vector<T> mul(size);
     for(int i=0;i<size;i++)
-        mul.num[i]*mul.num[i]*s;
+        mul.num[i]=this->num[i]*s;
     return mul;
 }
 
 template <typename T>
-Vector<T> & Vector<T>::operator*=(const T &n)//重载向量*=向量
+Vector<T> & Vector<T>::operator*=(const T n)//重载向量*=向量
 {
     for(int i=0;i<size;i++)
         this->num[i]=this->num[i]*n;
@@ -166,15 +160,12 @@ Vector<T> Vector<T>::operator-(const Vector<T> &ve)//重载-
 }
 
 template <typename T>
-T Vector<T>::operator[](int index)//重载[]
+T Vector<T>::operator[](const int index)throw(int )//重载[]
 {
-    try{
-        if(index<0||index>this->size)
-            throw 1;
-        return this->num[index];
-    }catch(int ){
-        cout<<"Index is out of boundary! "<<endl;
-    }
+    if (index < 0 || index > this->size)
+        throw (int)1;
+    return this->num[index];
+
 }
 
 template <typename T>
@@ -218,9 +209,9 @@ Vector<T> & Vector<T>::operator=(const Vector<T> &ve)//深赋值
 template <typename T>
 T Vector<T>::module() const//求模长
 {
-    T sum;
-    for(int i=0;i<size;i++)
-        sum+=this->num[i];
+    T sum=0;
+    for(int i=0;i<this->size;i++)
+        sum+=this->num[i]*this->num[i];
     return sqrt(sum);
 }
 
@@ -228,94 +219,18 @@ template <typename T>
 void Vector<T>::normalize()//向量单位化
 {
     T denominator=this->module();
-    for(int i=0;i<size;i++)
-        this->num[i]/=denominator;
-}
-
-template <typename T>
-T Vector<T>::get(int i)//对应序号的值
-{
-    try{
-        if(i>size||i<0)
-            throw 1;
-        else
-            return this->num[i];
-    }catch(int){
-        cout<<"the index you input is out of the boundary! "<<endl;
-    }
-}
-
-template <typename T>
-T Vector<T>::pop(int i)//取出最后一个位置的值，并从向量中去除
-{
-    try {
-        if (this->nums == NULL)//
-            throw 1;
-        double last = this->nums[this->size - 1];//与储存最后一个成员
-        double *new_nums = new double(this->size - 1);//重新申请内存空间
-        for (int i = 0; i < this->size - 1; i++)//拷贝数据
-        {
-            new_nums[i] = this->nums[i];
-        }
-        //指向新内存空间，内存拷贝，再删除new_nums
-        delete[] num;
-        num = new double(this->size - 1);
-        memcpy(num, new_nums, this->size);
-        delete new_nums;
-        //最后更新size
-        this->size--;
-        return last;
-    } catch (int ) {
-        cout<<"the vector is empty! "<<endl;
-    }
+    for(int i=0;i<this->size;i++)
+        this->num[i]=this->num[i]/denominator;
 }
 
 template <typename T>
 bool Vector<T>::empty() const//判断是否为空向量
 {
     if(this->size==0)
-        return false;
-    else
         return true;
+    else
+        return false;
 }
 
-template <typename T>
-void Vector<T>::append(T in)//在末尾添加向量
-{
-    //申请新空间
-    auto *new_nums = new T[this->size + 1];
-    //拷贝数据
-    int i;
-    for ( i = 0; i < this->size; i++)
-    {
-        new_nums[i] = this->nums[i];
-    }
-    new_nums[i+1] = in;
-    //指向新内存空间，内存拷贝，再删除new_nums
-    delete[] num;
-    num = new T[i+1];
-    memcpy(num, new_nums, i+1);
-    delete []new_nums;
-    //最后更新size
-    this->size++;
-}
-template <typename T>
-void Vector<T>::insert(int index, T in)//在指定位置插入值
-{
-    auto *new_num=new T[this->size+1];
-    int i;
-    for(i=0;i<size+1;i++)
-    {
-        if(i==index)
-            new_num[i]=in;
-        i++;
-        new_num[i]=this->num[i];
-    }
-    delete []num;
-    num=new T[i+1];
-    memcpy(num,new_num,i+1);
-    delete [] new_num;
-    this->size++;
-}
 
 #endif //XIANGMUSHIYAN_VECTOR_H
