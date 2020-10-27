@@ -22,17 +22,15 @@ public:
     //workingspace for sunyiyan
     //the defination of append
     String &append(const String &s);
-    String &append(const String &s, unsigned long pos, unsigned long n);
+    String &append(const String &s, unsigned long pos, unsigned long n)throw(int);
     String &append(const char *s);
     String &append(int num, const char s);
     //the functiong of the empty
     bool empty() const;
     //the defination of insert
     String &insert(int pos, const char *s);
-    String &insert(int idx, const String &str, int str_idx, int str_num);
-    String &insert(int __pos, const char *__s, int __n);
     //the defination of the substr
-    String substr(int pos, int n);
+    String substr(int pos, int n) throw(int);
     //the function of swap
     String &swap(char *s);
     String &swap(const String &s);
@@ -54,10 +52,11 @@ public:
     char *&ChineseReverse();
     void uppercase(String &Str);
     void lowercase(String &Str);
-    char *&copy(const String &Str);
+    /*char *&copy(const String &Str);
     char *&ncopy(const String &Str, int n);
     char *&catenate(const String &Str);
     char *&ncatenate(const String &Str, int n);
+     */
     char *c_str() const;
     //friend String operator=(const char*s);
     friend String operator+(const String &Str1, const String &Str2);

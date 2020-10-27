@@ -149,10 +149,21 @@ String &String::append(const char *s)
     return *this;
 }
 
-String &String::append(const String &s, unsigned long pos, unsigned long n)
+String &String::append(const String &s, unsigned long pos, unsigned long n) throw(int)
 {
     //Cut a certain number (n) of characters from a certain position (pos) of the str value of the data member of the incoming object to splice behind the str of the target object data member
     cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
+    try
+    {
+        if((int)strlen(s.str)<(int)(pos+n))
+            throw (int)0;
+    }
+    catch(int x)
+    {
+        if(x==0)
+            cout<<"Illegal input\n"<<endl;
+        //return *this;
+    }
     char temp[1024];
     int num;
     num=(int)strlen(str);
@@ -227,9 +238,31 @@ String &String::insert(int pos, const char *s)
 }
 
 //the function of substr
-String String::substr(int pos, int n)
+String String::substr(int pos, int n) throw(int)
 {
     //Extract n characters from a position (pos) of str in the data member of the target object
+    try
+    {
+        if((int)strlen(str)<(pos+n))
+            throw (int)0;
+        else
+            throw (int)1;
+    }
+    catch(int x)
+    {
+        if(x==0) cout<<"Illegal input\n"<<endl;
+        /*if(x==1)
+        {
+            String temp(*this, pos, n);
+            return temp;
+        }*/
+        //return *this;
+    }
+    /*catch(char)
+    {
+        String temp(*this, pos, n);
+        return temp;
+    }*/
     String temp(*this, pos, n);
     return temp;
 }

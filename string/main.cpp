@@ -92,6 +92,11 @@ void test3()
     cout<<"---CODE---(s1.append(str2,6,3);)\n"<<endl;
     s1.append(str2,6,3);
     s1.Show();
+    cout<<"---CODE---(String s1k = \"\")\n"<<endl;
+    cout<<"---CODE---(s1k.append(str2,6,19);)\n"<<endl;
+    String s1k = "";
+    s1k.append(str2,6,19);
+    //s1k.Show();
     cout<<"-------------------------------------------------------------------"<<endl;
     cout<<"---CODE---(s1.append(str2);)\n"<<endl;
     s1.append(str2);
@@ -114,9 +119,12 @@ void test3()
     //test for substr
     cout<<"---CODE---(String s4=\"this is (SOMETHING) in the brackets\";)\n"<<endl;
     String s4="this is (SOMETHING) in the brackets";
-    cout<<"\n---CODE---(String s40=s4.substr(9,9);)\n"<<endl;
-    String sub_str=s4.substr(9,9);
-    sub_str.Show();
+    cout<<"\n---CODE---(String sub_str1=s4.substr(9,9);)\n"<<endl;
+    String sub_str1=s4.substr(9,9);
+    sub_str1.Show();
+    cout<<"\n---CODE---(String sub_str2=s4.substr(9,39);)\n"<<endl;
+    String sub_str2=s4.substr(9,39);
+    sub_str2.Show();
     cout<<"-------------------------------------------------------------------"<<endl;
     //cout<<s4.substr(9,9).str<<endl;
     cout<<"\n\n---------------------------SWAP------------------------------------"<<endl;
