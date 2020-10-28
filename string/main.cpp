@@ -20,6 +20,7 @@ void test1()
     cout<<"\nNo parameter structure: "<<endl;
     cout<<"---CODE---(String C1;)\n"<<endl;
     String C1;
+    cout<<"---------------------------------------------------------------"<<endl;
     cout<<"\n-----------------------CONVERTING CONSTRUCT--------------------"<<endl;
     cout<<"\nParametric structure: "<<endl;
     cout<<"---------------------------------------------------------------"<<endl;
@@ -38,6 +39,7 @@ void test1()
     cout<<"4.take n characters from a certain position (pos) from the value of str in the data member of the reference object as the value of Str of the data member of the target object: "<<endl;
     cout<<"---CODE---(String C5(C4,5,5);)\n"<<endl;
     String C5(C4,5,5);
+	cout<<"----------------------------------------------------------------"<<endl;
 	cout<<"\n------------------------------COPY------------------------------"<<endl;
     cout<<"\n5.use the value of str in the data member of the input object as the value of Str in the data member of the target object: "<<endl;
     cout<<"---CODE---(String C6(C4);)\n"<<endl;
