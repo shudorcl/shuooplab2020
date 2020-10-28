@@ -228,9 +228,21 @@ String &String::append(int num, const char s)
 }
 
 //the function of insert
-String &String::insert(int pos, const char *s)
+String &String::insert(int pos, const char *s) throw(int)
 {
     //insert the input character from a certain position (pos) of str in the data member of the target object
+    try
+    {
+        int n = (int)strlen(str);
+        if (pos > n)
+            throw (int)0;
+    }
+    catch (int)
+    {
+        cout<<"Iligal input! The position will be redirected to the end of the string！"<<endl;
+        int k = (int)strlen(str);
+        pos = k;
+    }
     int n = (int)strlen(str);
     if (pos > n)
         pos = n;

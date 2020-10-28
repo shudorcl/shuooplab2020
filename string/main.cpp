@@ -117,6 +117,13 @@ void test3()
     cout<<"Insert the input character from a certain position (pos) of str in the data member of the target object: "<<endl;
     s3.Show();
     cout<<"-------------------------------------------------------------------"<<endl;
+    cout<<"---CODE---(String s3r=\"position () for insert\";)\n"<<endl;
+    String s3r="position () for insert";
+    cout<<"\n---CODE---(s3r.insert(199,\" insert characters\");)\n"<<endl;
+    s3r.insert(199," insert characters");
+    cout<<"Insert the input character from a certain position (pos) of str in the data member of the target object: "<<endl;
+    s3r.Show();
+    cout<<"-------------------------------------------------------------------"<<endl;
     cout<<"\n\n--------------------------SUBSTR-----------------------------------"<<endl;
     //test for substr
     cout<<"---CODE---(String s4=\"this is (SOMETHING) in the brackets\";)\n"<<endl;
@@ -173,11 +180,12 @@ void test3()
     cout<<"-------------------------------------------------------------------"<<endl;
     cout<<"\n\n-----------------------CHINESE_RESERVE-----------------------------"<<endl;
     //test for reverse
-    cout<<"---CODE---(String s10=\"\";)\n"<<endl;
-    String s10="";
+    cout<<"---CODE---(String s10=\"这句话被反转了吗？\";)\n"<<endl;
+    String s10="这句话被反转了吗？";
     cout<<"\n---CODE---(s10.ChineseReverse();)\n"<<endl;
     s10.ChineseReverse();
-    s10.Show();
+    cout<<"？吗了转帆被话句这"<<endl;
+    //s10.Show();
     cout<<"\n\n------------------------------DESTRUCT-----------------------------\n"<<endl;
 }
 void test4()

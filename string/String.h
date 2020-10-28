@@ -28,7 +28,7 @@ public:
     //the functiong of the empty
     bool empty() const;
     //the defination of insert
-    String &insert(int pos, const char *s);
+    String &insert(int pos, const char *s) throw(int);
     //the defination of the substr
     String substr(int pos, int n) throw(int);
     //the function of swap
