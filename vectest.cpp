@@ -6,6 +6,9 @@ int main() {
     Vector<double> v1(1.5,10);
     Vector<double> v2(3,10);
     Vector<int>v3(0);//空向量
+    Vector<int>v4(5);//空向量
+    Vector<int>v5(v4);//空向量
+    cout<<v5;
     cout<<v1<<v2;//测试重载输出流
     cout<<v1+v2;//测试重载+
     cout<<v1*v2;//测试重载叉乘
@@ -17,7 +20,7 @@ int main() {
     cout<<v2<<endl;
     v2+=2;//测试迭代运算符
     cout<<v2<<endl;
-    cout<<v2[6]<<endl;//测试重载[]
+    cout<<v2[8]<<endl;//测试重载[]
     cout<<v2.module()<<endl;//求模长
     cout<<v3.empty()<<endl;//判断空向量测试
     v3.vdimup(3);//测试向量升维
@@ -26,6 +29,5 @@ int main() {
     cout<<v3;
     cout<<v1.multiply(v2)<<endl;//测试点乘
     cout<<v1.angle(v2)<<"angle"<<endl;//测试角度计算
-
     return 0;
 }
