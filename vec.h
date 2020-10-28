@@ -28,7 +28,7 @@ public:
     double angle(const Vector<T> &ve);//角度计算
     T multiply(const Vector<T> &ve);//点乘
     //运算符的重载
-    Vector operator+(const Vector<T> &ve);//向量与向量相加
+        Vector operator+(const Vector<T> &ve);//向量与向量相加
     Vector operator+(const T s);
     Vector operator-(const Vector<T> &ve);
     Vector & operator+=(Vector<T> &ve);
@@ -40,7 +40,7 @@ public:
     Vector operator*(const T s);
     T operator[](const int index);//重载[]
     friend Vector operator+(const T s,Vector<T> &ve){return ve+s;}//+友元函数
-    friend Vector operator*(const T s,Vector<T>&ve)
+    friend Vector<T> operator*(const T s,Vector<T>&ve)
     {
         return ve*s;
     }
@@ -55,7 +55,11 @@ public:
                 out<<ve.num[i];
         out<<" ]"<<endl;
         return out;
-    }
+    }//重载输出流
+    template<typename T1,typename T2>
+    friend Vector<double>  operator+(const Vector<T1> &ve1,const Vector<T2>&ve2);
+    template<typename T1,typename T2>
+    friend Vector<double>  operator*(const Vector<T1> &ve1,const Vector<T2>&ve2);
 };
 
 template <typename T>
@@ -102,15 +106,14 @@ Vector<T> Vector<T>::operator+(const Vector<T> & ve)//重载+运算符向量相�
     try {
         if (this->size != ve.size)
             throw 1;
-        Vector<T> sum(size);
-        for (int i = 0; i < this->size; i++) {
-            sum.num[i] = this->num[i] + ve.num[i];
-        }
-        return sum;
     } catch (int ) {
         cout<<"+size different"<<endl;
     }
-
+    Vector<T> sum(size);
+    for (int i = 0; i < this->size; i++) {
+        sum.num[i] = this->num[i] + ve.num[i];
+    }
+    return sum;
 }
 template <typename T>
 Vector<T> Vector<T>::operator+(const T s)//重载向量与数相加
@@ -127,13 +130,13 @@ Vector<T> & Vector<T>::operator+=(Vector<T> &ve)//重载向量+=向量
     try {
         if (this->size != ve.size)
             throw 1;
-        for (int i = 0; i < this->size; i++)
-            this->num[i] = this->num[i] + ve.num[i];
-        return *this;
     } catch (int ) {
         cout<<"+=size different"<<endl;
 
     }
+    for (int i = 0; i < this->size; i++)
+        this->num[i] = this->num[i] + ve.num[i];
+    return *this;
 
 }
 template <typename T>
@@ -150,14 +153,14 @@ Vector<T> Vector<T>::operator*(const Vector<T> &ve) //重载点乘
     try {
         if (this->size != ve.size)
             throw 1;
-        Vector<T> mul(this->size);
-        for (int i = 0; i < this->size; i++) {
-            mul.num[i] = this->num[i] * ve.num[i];
-        }
-        return mul;
     } catch (int ) {
         cout<<"*size different"<<endl;
     }
+    Vector<T> mul(this->size);
+    for (int i = 0; i < this->size; i++) {
+        mul.num[i] = this->num[i] * ve.num[i];
+    }
+    return mul;
 }
 template <typename T>
 Vector<T> Vector<T>::operator*(const T s)//重载向量*一个数值
@@ -182,13 +185,13 @@ Vector<T> Vector<T>::operator-(const Vector<T> &ve)//重载-
     try {
         if (this->size != ve.size)
             throw 1;
-        Vector<T> div(size);
-        for (int i = 0; i < size; i++)
-            div.num[i] = this->num[i] - ve.num[i];
-        return div;
     } catch (int ) {
         cout<<"-size different"<<endl;
     }
+    Vector<T> div(size);
+    for (int i = 0; i < size; i++)
+        div.num[i] = this->num[i] - ve.num[i];
+    return div;
 }
 
 template <typename T>
@@ -197,11 +200,10 @@ T Vector<T>::operator[](const int index)//重载[]
     try {
         if (index < 0 || index >=this->size)
             throw 1;
-        else
-            return this->num[index];
     } catch (int) {
         cout<<"[] size out of boundary!"<<endl;
     }
+    return this->num[index];
 }
 
 template <typename T>
@@ -238,6 +240,23 @@ Vector<T> & Vector<T>::operator=(const Vector<T> &ve)//深赋值
     }
     else
         return *this;
+}
+
+template<typename T1,typename T2>
+Vector<double>  operator+(const Vector<T1> &ve1,const Vector<T2>&ve2)
+{
+    Vector<double> sum(ve1.size);
+    for(int i=0;i<sum.size;i++)
+        sum.num[i]=ve1.num[i]+ve2.num[i];
+    return sum;
+}
+template <typename T1,typename T2>
+Vector<double> operator*(const Vector<T1>&ve1,const Vector<T2>&ve2)
+{
+    Vector<double> sum(ve1.size);
+    for(int i=0;i<sum.size;i++)
+        sum.num[i]=ve1.num[i]*ve2.num[i];
+    return sum;
 }
 
 //功能
@@ -304,13 +323,12 @@ T Vector<T>::multiply(const Vector<T> &ve)
     try {
         if (this->size != ve.size)
             throw 1;
-        T sum = 0;
-        for (int i = 0; i < size; i++)
-            sum = sum + this->num[i] + ve.num[i];
-        return sum;
     } catch (int ) {
         cout<<"multiply size different!"<<endl;
     }
+    T sum = 0;
+    for (int i = 0; i < size; i++)
+        sum = sum + this->num[i] + ve.num[i];
+    return sum;
 }
 #endif //VECFINAL_VEC_H
-
