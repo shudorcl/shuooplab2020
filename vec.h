@@ -26,25 +26,25 @@ public:
     void vdimup(const int x);//维数增加，多出部分自动补0
     void vdimdown(const int x);//维数减少，多于直接删除
     double angle(const Vector<T> &ve);//角度计算
-    T multiply(const Vector<T> &ve)throw(int);//点乘
+    T multiply(const Vector<T> &ve);//点乘
     //运算符的重载
-    Vector operator+(const Vector<T> &ve)throw(int);//向量与向量相加
+    Vector operator+(const Vector<T> &ve);//向量与向量相加
     Vector operator+(const T s);
-    friend Vector operator+(const T s,Vector<T> &ve){return ve+s;}//+友元函数
     Vector operator-(const Vector<T> &ve);
-    Vector & operator+=(Vector<T> &ve)throw(int);
+    Vector & operator+=(Vector<T> &ve);
     Vector & operator+=(const T s);
     Vector & operator=(const Vector<T> & ve);//深赋值
     bool operator!=(const Vector<T> &ve);
     bool operator==(const Vector<T> &ve);
-    Vector operator*(const Vector<T> &ve)throw(int);
+    Vector operator*(const Vector<T> &ve);
     Vector operator*(const T s);
+    T operator[](const int index);//重载[]
+    friend Vector operator+(const T s,Vector<T> &ve){return ve+s;}//+友元函数
     friend Vector operator*(const T s,Vector<T>&ve)
     {
         return ve*s;
     }
     Vector & operator*=(const T n);
-    T operator[](const int index)throw(int);//重载[]
     friend ostream & operator<<(ostream &out,const Vector<T> &ve)//重载输出流
     {
         out<<"[ ";
@@ -59,24 +59,32 @@ public:
 };
 
 template <typename T>
-Vector<T>::Vector(int vdim) :num(new T[size]),size(vdim)//构造一个默认初始化为0的向量
+Vector<T>::Vector(int vdim)//构造一个默认初始化为0的向量
 {
+    size=vdim;
+    num=new T[vdim];
+    cout<<"construct success!"<<endl;
     for(int i=0;i<vdim;i++)
         num[i]=0;
 }
 template <typename T>
-Vector<T>::Vector(T para, int vdim):num(new T[vdim]),size(vdim)//带默认值的向量
+Vector<T>::Vector(T para, int vdim)//带默认值的向量
 {
+    size=vdim;
+    num=new T[vdim];
+    cout<<"construct success(include parameter)!"<<endl;
     for(int i=0;i<size;i++)
         num[i]=para;
 }
 template <typename T>
 Vector<T>::Vector(const Vector<T> &ve)//深拷贝构造函数
 {
+    if(ve.size){
+    cout<<"construct success(copy)!"<<endl;
     num=new T[ve.size];
     size=ve.size;
     for(int i=0;i<size;i++)
-        num[i]=ve.num[i];
+        num[i]=ve.num[i];}
 }
 
 template <typename T>
@@ -89,15 +97,19 @@ Vector<T>::~Vector()
 //运算符重载
 
 template<typename T>
-Vector<T> Vector<T>::operator+(const Vector<T> & ve)throw(int)//重载+运算符向量相加
+Vector<T> Vector<T>::operator+(const Vector<T> & ve)//重载+运算符向量相加
 {
-    if(this->size!=ve.size)
-        throw (int)1;
-    Vector<T> sum(size);
-    for(int i=0;i<this->size;i++) {
-        sum.num[i]=this->num[i] + ve.num[i];
+    try {
+        if (this->size != ve.size)
+            throw 1;
+        Vector<T> sum(size);
+        for (int i = 0; i < this->size; i++) {
+            sum.num[i] = this->num[i] + ve.num[i];
+        }
+        return sum;
+    } catch (int ) {
+        cout<<"+size different"<<endl;
     }
-    return sum;
 
 }
 template <typename T>
@@ -110,14 +122,18 @@ Vector<T> Vector<T>::operator+(const T s)//重载向量与数相加
 }
 
 template <typename T>
-Vector<T> & Vector<T>::operator+=(Vector<T> &ve)throw(int)//重载向量+=向量
+Vector<T> & Vector<T>::operator+=(Vector<T> &ve)//重载向量+=向量
 {
+    try {
+        if (this->size != ve.size)
+            throw 1;
+        for (int i = 0; i < this->size; i++)
+            this->num[i] = this->num[i] + ve.num[i];
+        return *this;
+    } catch (int ) {
+        cout<<"+=size different"<<endl;
 
-    if(this->size!=ve.size)
-        throw (int)1;
-    for(int i=0;i<this->size;i++)
-        this->num[i]=this->num[i]+ve.num[i];
-    return *this;
+    }
 
 }
 template <typename T>
@@ -129,16 +145,19 @@ Vector<T> & Vector<T>::operator+=(const T s)//重载向量+=数值
 }
 
 template <typename T>
-Vector<T> Vector<T>::operator*(const Vector<T> &ve) throw(int)//重载点乘
+Vector<T> Vector<T>::operator*(const Vector<T> &ve) //重载点乘
 {
-    if(this->size!=ve.size)
-        throw (int)1;
-    Vector<T> mul(this->size);
-    for(int i=0;i<this->size;i++)
-    {
-        mul.num[i]=this->num[i]*ve.num[i];
+    try {
+        if (this->size != ve.size)
+            throw 1;
+        Vector<T> mul(this->size);
+        for (int i = 0; i < this->size; i++) {
+            mul.num[i] = this->num[i] * ve.num[i];
+        }
+        return mul;
+    } catch (int ) {
+        cout<<"*size different"<<endl;
     }
-    return mul;
 }
 template <typename T>
 Vector<T> Vector<T>::operator*(const T s)//重载向量*一个数值
@@ -160,21 +179,29 @@ Vector<T> & Vector<T>::operator*=(const T n)//重载向量*=向量
 template <typename T>
 Vector<T> Vector<T>::operator-(const Vector<T> &ve)//重载-
 {
-    if(this->size!=ve.size)
-        cout<<"wrong"<<endl;
-    Vector<T> div(size);
-    for(int i=0;i<size;i++)
-        div.num[i]=this->num[i]-ve.num[i];
-    return div;
+    try {
+        if (this->size != ve.size)
+            throw 1;
+        Vector<T> div(size);
+        for (int i = 0; i < size; i++)
+            div.num[i] = this->num[i] - ve.num[i];
+        return div;
+    } catch (int ) {
+        cout<<"-size different"<<endl;
+    }
 }
 
 template <typename T>
-T Vector<T>::operator[](const int index)throw(int )//重载[]
+T Vector<T>::operator[](const int index)//重载[]
 {
-    if (index < 0 || index > this->size)
-        throw (int)1;
-    return this->num[index];
-
+    try {
+        if (index < 0 || index >=this->size)
+            throw 1;
+        else
+            return this->num[index];
+    } catch (int) {
+        cout<<"[] size out of boundary!"<<endl;
+    }
 }
 
 template <typename T>
@@ -272,14 +299,18 @@ double Vector<T>::angle(const Vector<T> &ve)
 }
 
 template <typename T>
-T Vector<T>::multiply(const Vector<T> &ve)throw(int)
+T Vector<T>::multiply(const Vector<T> &ve)
 {
-    if(this->size!=ve.size)
-        throw (int)1;
-    T sum=0;
-    for(int i=0;i<size;i++)
-        sum=sum+this->num[i]+ve.num[i];
-    return sum;
+    try {
+        if (this->size != ve.size)
+            throw 1;
+        T sum = 0;
+        for (int i = 0; i < size; i++)
+            sum = sum + this->num[i] + ve.num[i];
+        return sum;
+    } catch (int ) {
+        cout<<"multiply size different!"<<endl;
+    }
 }
 #endif //VECFINAL_VEC_H
 
