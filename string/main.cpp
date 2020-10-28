@@ -96,9 +96,9 @@ void test3()
     s1.Show();
     cout<<"---CODE---(String s1k = \"\")\n"<<endl;
     cout<<"---CODE---(s1k.append(str2,6,19);)\n"<<endl;
-    String s1k = "";
-    s1k.append(str2,6,19);
-    //s1k.Show();
+    //String s1k = "";
+    s1.append(str2,6,19);
+    s1.Show();
     cout<<"-------------------------------------------------------------------"<<endl;
     cout<<"---CODE---(s1.append(str2);)\n"<<endl;
     s1.append(str2);
@@ -182,7 +182,7 @@ void test3()
 }
 void test4()
 {
-    cout<<"\n-------------------------------------------TEST OVERLOADED RELATIONAL OPERATORs------------------------------------";
+    cout<<"\n-------------------------------------------TEST OVERLOADED RELATIONAL OPERATORS------------------------------------";
     cout<<"\n\n------------------------TEST OPERATOR '=' -------------------------"<<endl;
     cout<<"---CODE---(String L1=\"Waiting to be copied\";)"<<endl;
     String L1="Waiting to be copied";

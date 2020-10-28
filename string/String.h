@@ -41,7 +41,7 @@ public:
     void pop_back();
     //the defination of reverse
     void Show() const;
-    String &operator=(const String &Str);
+    //String &operator=(const String &Str);
     //String Function rcl
     unsigned long length() const;
     unsigned long size() const;
@@ -58,7 +58,7 @@ public:
     char *&ncatenate(const String &Str, int n);
      */
     char *c_str() const;
-    //friend String operator=(const char*s);
+    String &operator=(const String &Str);
     friend String operator+(const String &Str1, const String &Str2);
     String &operator+=(const String &Str);
     friend bool operator==(const String &Str1, const String &Str2);
