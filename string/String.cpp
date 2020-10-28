@@ -152,30 +152,37 @@ String &String::append(const char *s)
 String &String::append(const String &s, unsigned long pos, unsigned long n) throw(int)
 {
     //Cut a certain number (n) of characters from a certain position (pos) of the str value of the data member of the incoming object to splice behind the str of the target object data member
-    cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
     try
     {
         if((int)strlen(s.str)<(int)(pos+n))
             throw (int)0;
+        else throw (int)1;
     }
     catch(int x)
     {
         if(x==0)
-            cout<<"Illegal input\n"<<endl;
-        //return *this;
+        {
+            cout<<"Illegal input!\n"<<endl;
+            str=new char[1];
+            str[0]='\0';
+        }
+        if (x==1)
+        {
+            cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
+            char temp[1024];
+            int num;
+            num=(int)strlen(str);
+            strcpy(temp,str);
+            for(unsigned long i=pos;i<pos+n;i++)
+            {
+                temp[num]=s.str[i];
+                num++;
+            }
+            temp[num]='\0';
+            str=new char[m_str+n];
+            strcpy(str,temp);
+        }
     }
-    char temp[1024];
-    int num;
-    num=(int)strlen(str);
-    strcpy(temp,str);
-    for(unsigned long i=pos;i<pos+n;i++)
-    {
-        temp[num]=s.str[i];
-        num++;
-    }
-    temp[num]='\0';
-    str=new char[m_str+n];
-    strcpy(str,temp);
     return *this;
 }
 
@@ -241,6 +248,7 @@ String &String::insert(int pos, const char *s)
 String String::substr(int pos, int n) throw(int)
 {
     //Extract n characters from a position (pos) of str in the data member of the target object
+    String temp;
     try
     {
         if((int)strlen(str)<(pos+n))
@@ -250,12 +258,19 @@ String String::substr(int pos, int n) throw(int)
     }
     catch(int x)
     {
-        if(x==0) cout<<"Illegal input\n"<<endl;
-        /*if(x==1)
+        if(x==0)
         {
-            String temp(*this, pos, n);
-            return temp;
-        }*/
+            cout<<"Illegal input\n"<<endl;
+        }
+        if(x==1)
+        {
+            int i;
+            temp.str = new char[n + 1];
+            for (i = 0; i < n; i++)
+                temp[i] = str[pos + i];
+            temp[i] = '\0';
+            //String temp(*this, pos, n);
+        }
         //return *this;
     }
     /*catch(char)
@@ -263,7 +278,6 @@ String String::substr(int pos, int n) throw(int)
         String temp(*this, pos, n);
         return temp;
     }*/
-    String temp(*this, pos, n);
     return temp;
 }
 //the function of swap
