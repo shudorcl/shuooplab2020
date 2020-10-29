@@ -13,13 +13,28 @@ String::String(const char *s)
     cout << "A String is constructed.("
          << str << ')' << endl;
 }
-String::String(const char *s, unsigned long n)
+String::String(const char *s, unsigned long n) throw(int)
 {
     //take n characters of the input string as the value of Str of the data member of the target object
-    if (strlen(s) < n)
-        str = new char[strlen(s) + 1];
-    else
-        str = new char[n + 1];
+    try
+    {
+        if (strlen(s) < n)
+            throw (int)1;
+        else throw (int)0;
+    }
+    catch (int x)
+    {
+        if(x==1)
+        {
+            cout<<"The specified character length is out of range, the interception will stop at the end of the string"<<endl;
+            str = new char[strlen(s) + 1];
+        }
+        else
+        {
+            str = new char[n + 1];
+        }
+            
+    }
     strcpy(str, s);
     str[n] = '\0';
     cout << "A String is constructed.(Method 2)("
@@ -37,27 +52,46 @@ String::String(int n, char c)
          << str << ')' << endl;
 }
 
-String::String(const String &Str, int pos, int n)
+String::String(const String &Str, int pos, int n) throw(int)
 {
     //take n characters from a certain position (pos) from the value of str in the data member of the reference object as the value of Str of the data member of the target object
     int i, m;
     m = (int)strlen(Str.str);
-    if (pos > m)
+    try
     {
-        str = new char[1];
-        str[0] = '\0';
-        return;
+        if (pos > m)
+            throw (int) 1;
+        else if (m - pos < n)
+        {
+            cout<<"The specified character length is out of range, the interception will stop at the end of the string"<<endl;
+            n = m - pos;
+            throw (int) 2;
+        }
+        else throw (int) 0;
+     }
+    catch (int x)
+    {
+        if (x==1)
+        {
+            cout<<"Iligal input! No object will be constructed! \n"<<endl;
+            str = new char[1];
+            str[1]='\0';
+        }
+        //    cout<<"Iligal input! No object will be constructed! \n"<<endl;
+        //cout<<"Iligal input! No object will be constructed! \n"<<endl;
+        //str[0] = '\0';
+        if (x==2||x==0)
+        {
+            str = new char[n + 1];
+            for (i = 0; i < n; i++)
+                str[i] = Str.str[pos + i];
+            str[i] = '\0';
+            cout << "A String is constructed.(Method 4)("
+                 << str << ')' << endl;
+        }
     }
-    if (m - pos < n)
-        n = m - pos;
-    if (n < 0)
-        n = 0;
-    str = new char[n + 1];
-    for (i = 0; i < n; i++)
-        str[i] = Str.str[pos + i];
-    str[i] = '\0';
-    cout << "A String is constructed.(Method 4)("
-         << str << ')' << endl;
+    //if (n < 0)
+    //    n = 0;
 }
 
 String::String(const String &Str)

@@ -12,10 +12,10 @@ private:
 public:
     //char *str;
     String(const char *s = "");
-    String(const char *s, unsigned long n);
+    String(const char *s, unsigned long n) throw(int);
     String(int n, char c);
     String(const String &Str);
-    String(const String &Str, int pos, int n);
+    String(const String &Str, int pos, int n) throw(int);
     virtual ~String();
 
     //String Function

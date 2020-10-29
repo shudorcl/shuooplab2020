@@ -30,8 +30,10 @@ void test1()
     String C2="nice to see you";
     cout<<"---------------------------------------------------------------"<<endl;
     cout<<"2.take n characters of the input string as the value of Str of the data member of the target object: "<<endl;
-    cout<<"---CODE---(String C3(\"nice to see you!\",16);)\n"<<endl;
-    String C3("nice to see you!",16);
+    cout<<"---CODE---(String C3(\"nice to see you all!\",16);)\n"<<endl;
+    String C3("nice to see you all!",16);
+    cout<<"\n$---CODE---(String C3r(\"nice to see you all!\",36);)\n"<<endl;
+    String C3r("nice to see you all!",36);
 	cout<<"---------------------------------------------------------------"<<endl;
     cout<<"3.repeat the input character n times as the value of Str of the data member of the target object: "<<endl;
     cout<<"---CODE---(String C4(10,'S');)\n"<<endl;
@@ -40,6 +42,10 @@ void test1()
     cout<<"4.take n characters from a certain position (pos) from the value of str in the data member of the reference\n object as the value of Str of the data member of the target object: "<<endl;
     cout<<"---CODE---(String C5(C4,5,5);)\n"<<endl;
     String C5(C4,5,5);
+    cout<<"\n---CODE---(String C5r(C4,15,3);)\n"<<endl;
+    String C5r(C4,15,3);
+    cout<<"---CODE---(String C5s(C4,5,15);)\n"<<endl;
+    String C5s(C4,5,15);
     cout<<"-----------------------------------------------------------------------------------------------------------\n"<<endl;
 	//cout<<"---------------------------------------------------------------"<<endl;
 	cout<<"\n----------------------------------------------------COPY---------------------------------------------------"<<endl;
