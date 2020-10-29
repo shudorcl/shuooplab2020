@@ -168,7 +168,7 @@ String &String::append(const String &s, unsigned long pos, unsigned long n) thro
         }
         if (x==1)
         {
-            cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
+            cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of\n the incoming object to splice behind the str of the target object data member:"<<endl;
             char temp[1024];
             int num;
             num=(int)strlen(str);
@@ -199,7 +199,7 @@ bool String::empty() const
 String &String::append(const String &s)
 {
     //Directly splice the str value of the data member of the incoming object to the back of the str of the target data member
-    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target data member:"<<endl;
+    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target\n data member:"<<endl;
     char temp[1024];
     strcpy(temp, str);
     strcat(temp, s.str);
@@ -212,7 +212,7 @@ String &String::append(const String &s)
 String &String::append(int num, const char s)
 {
     //Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member
-    cout<<"Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member:"<<endl;
+    cout<<"Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target\n object data member:"<<endl;
     char p_temp[100];
     strcpy(p_temp,str);
     int i =(int)strlen(str);
@@ -239,7 +239,7 @@ String &String::insert(int pos, const char *s) throw(int)
     }
     catch (int)
     {
-        cout<<"Iligal input! The position will be redirected to the end of the string！"<<endl;
+        cout<<"Iligal input! The position will be redirected to the end of the string!\n"<<endl;
         int k = (int)strlen(str);
         pos = k;
     }
