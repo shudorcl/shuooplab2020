@@ -12,10 +12,10 @@ private:
 public:
     //char *str;
     String(const char *s = "");
-    String(const char *s, unsigned long n);
+    String(const char *s, unsigned long n) throw(int);
     String(int n, char c);
     String(const String &Str);
-    String(const String &Str, int pos, int n);
+    String(const String &Str, int pos, int n) throw(int);
     virtual ~String();
 
     //String Function
@@ -28,7 +28,7 @@ public:
     //the functiong of the empty
     bool empty() const;
     //the defination of insert
-    String &insert(int pos, const char *s);
+    String &insert(int pos, const char *s) throw(int);
     //the defination of the substr
     String substr(int pos, int n) throw(int);
     //the function of swap
@@ -47,7 +47,6 @@ public:
     unsigned long size() const;
 	long find(const String &Str) const;
 	long rfind(const String &Str) const;
-    //void swap(String &Str);
     char *&reverse();
     char *&ChineseReverse();
     void uppercase(String &Str);

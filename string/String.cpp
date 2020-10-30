@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-//rcl's construc func
+//rcl's construc function
 String::String(const char *s)
 {
     //use the entered character as the value of Str of the data member of the target object
@@ -13,13 +13,28 @@ String::String(const char *s)
     cout << "A String is constructed.("
          << str << ')' << endl;
 }
-String::String(const char *s, unsigned long n)
+String::String(const char *s, unsigned long n) throw(int)
 {
     //take n characters of the input string as the value of Str of the data member of the target object
-    if (strlen(s) < n)
-        str = new char[strlen(s) + 1];
-    else
-        str = new char[n + 1];
+    try
+    {
+        if (strlen(s) < n)
+            throw (int)1;
+        else throw (int)0;
+    }
+    catch (int x)
+    {
+        if(x==1)
+        {
+            cout<<"The specified character length is out of range, the interception will stop at the end of the string"<<endl;
+            str = new char[strlen(s) + 1];
+        }
+        else
+        {
+            str = new char[n + 1];
+        }
+            
+    }
     strcpy(str, s);
     str[n] = '\0';
     cout << "A String is constructed.(Method 2)("
@@ -37,27 +52,46 @@ String::String(int n, char c)
          << str << ')' << endl;
 }
 
-String::String(const String &Str, int pos, int n)
+String::String(const String &Str, int pos, int n) throw(int)
 {
     //take n characters from a certain position (pos) from the value of str in the data member of the reference object as the value of Str of the data member of the target object
     int i, m;
     m = (int)strlen(Str.str);
-    if (pos > m)
+    try
     {
-        str = new char[1];
-        str[0] = '\0';
-        return;
+        if (pos > m)
+            throw (int) 1;
+        else if (m - pos < n)
+        {
+            cout<<"The specified character length is out of range, the interception will stop at the end of the string"<<endl;
+            n = m - pos;
+            throw (int) 2;
+        }
+        else throw (int) 0;
+     }
+    catch (int x)
+    {
+        if (x==1)
+        {
+            cout<<"Iligal input! No object will be constructed! \n"<<endl;
+            str = new char[1];
+            str[1]='\0';
+        }
+        //    cout<<"Iligal input! No object will be constructed! \n"<<endl;
+        //cout<<"Iligal input! No object will be constructed! \n"<<endl;
+        //str[0] = '\0';
+        if (x==2||x==0)
+        {
+            str = new char[n + 1];
+            for (i = 0; i < n; i++)
+                str[i] = Str.str[pos + i];
+            str[i] = '\0';
+            cout << "A String is constructed.(Method 4)("
+                 << str << ')' << endl;
+        }
     }
-    if (m - pos < n)
-        n = m - pos;
-    if (n < 0)
-        n = 0;
-    str = new char[n + 1];
-    for (i = 0; i < n; i++)
-        str[i] = Str.str[pos + i];
-    str[i] = '\0';
-    cout << "A String is constructed.(Method 4)("
-         << str << ')' << endl;
+    //if (n < 0)
+    //    n = 0;
 }
 
 String::String(const String &Str)
@@ -168,7 +202,7 @@ String &String::append(const String &s, unsigned long pos, unsigned long n) thro
         }
         if (x==1)
         {
-            cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of the incoming object to splice behind the str of the target object data member:"<<endl;
+            cout<<"Cut a certain number (n) of characters from a certain position (POS) of the str value of the data member of\n the incoming object to splice behind the str of the target object data member:"<<endl;
             char temp[1024];
             int num;
             num=(int)strlen(str);
@@ -199,7 +233,7 @@ bool String::empty() const
 String &String::append(const String &s)
 {
     //Directly splice the str value of the data member of the incoming object to the back of the str of the target data member
-    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target data member:"<<endl;
+    cout<<"Directly splice the str value of the data member of the incoming object to the back of the str of the target\n data member:"<<endl;
     char temp[1024];
     strcpy(temp, str);
     strcat(temp, s.str);
@@ -212,7 +246,7 @@ String &String::append(const String &s)
 String &String::append(int num, const char s)
 {
     //Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member
-    cout<<"Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target object data member:"<<endl;
+    cout<<"Set a certain number (n) of repetitions for the incoming string and splice it behind the str of the target\n object data member:"<<endl;
     char p_temp[100];
     strcpy(p_temp,str);
     int i =(int)strlen(str);
@@ -228,9 +262,21 @@ String &String::append(int num, const char s)
 }
 
 //the function of insert
-String &String::insert(int pos, const char *s)
+String &String::insert(int pos, const char *s) throw(int)
 {
     //insert the input character from a certain position (pos) of str in the data member of the target object
+    try
+    {
+        int n = (int)strlen(str);
+        if (pos > n)
+            throw (int)0;
+    }
+    catch (int)
+    {
+        cout<<"Iligal input! The position will be redirected to the end of the string!\n"<<endl;
+        int k = (int)strlen(str);
+        pos = k;
+    }
     int n = (int)strlen(str);
     if (pos > n)
         pos = n;
