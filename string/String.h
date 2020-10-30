@@ -47,7 +47,6 @@ public:
     unsigned long size() const;
 	long find(const String &Str) const;
 	long rfind(const String &Str) const;
-    //void swap(String &Str);
     char *&reverse();
     char *&ChineseReverse();
     void uppercase(String &Str);

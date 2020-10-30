@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-//rcl's construc func
+//rcl's construc function
 String::String(const char *s)
 {
     //use the entered character as the value of Str of the data member of the target object
