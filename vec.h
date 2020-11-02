@@ -36,9 +36,9 @@ public:
     Vector & operator=(const Vector<T> & ve);//深赋值
     bool operator!=(const Vector<T> &ve);
     bool operator==(const Vector<T> &ve);
-    Vector operator*(const Vector<T> &ve);
+    Vector operator*(const Vector<T> &ve)throw(int);
     Vector operator*(const T s);
-    T operator[](const int index);//重载[]
+    T operator[](const int index)throw(int);//重载[]
     friend Vector operator+(const T s,Vector<T> &ve){return ve+s;}//+友元函数
     friend Vector<T> operator*(const T s,Vector<T>&ve)
     {
@@ -148,19 +148,19 @@ Vector<T> & Vector<T>::operator+=(const T s)//重载向量+=数值
 }
 
 template <typename T>
-Vector<T> Vector<T>::operator*(const Vector<T> &ve) //重载点乘
+Vector<T> Vector<T>::operator*(const Vector<T> &ve)throw(int) //重载点乘
 {
-    try {
-        if (this->size != ve.size)
-            throw 1;
-    } catch (int ) {
-        cout<<"*size different"<<endl;
-    }
-    Vector<T> mul(this->size);
-    for (int i = 0; i < this->size; i++) {
-        mul.num[i] = this->num[i] * ve.num[i];
-    }
-    return mul;
+
+    if (this->size != ve.size)
+        throw 1;
+    else {
+            Vector<T> mul(this->size);
+            for (int i = 0; i < this->size; i++) {
+                mul.num[i] = this->num[i] * ve.num[i];
+            }
+            return mul;
+        }
+
 }
 template <typename T>
 Vector<T> Vector<T>::operator*(const T s)//重载向量*一个数值
@@ -195,15 +195,13 @@ Vector<T> Vector<T>::operator-(const Vector<T> &ve)//重载-
 }
 
 template <typename T>
-T Vector<T>::operator[](const int index)//重载[]
+T Vector<T>::operator[](const int index)throw(int)//重载[]
 {
-    try {
-        if (index < 0 || index >=this->size)
-            throw 1;
-    } catch (int) {
-        cout<<"[] size out of boundary!"<<endl;
-    }
-    return this->num[index];
+    if (index < 0 || index >= this->size)
+        throw 1;
+    else
+        return this->num[index];
+
 }
 
 template <typename T>
@@ -332,3 +330,4 @@ T Vector<T>::multiply(const Vector<T> &ve)
     return sum;
 }
 #endif //VECFINAL_VEC_H
+
