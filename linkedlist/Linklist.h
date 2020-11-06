@@ -12,7 +12,7 @@ template <typename T> class Node		// 中间层：结点类（模板）
 {
 public:
     Node() : next(NULL) {}									// 默认的构造函数
-    Node(const T &t) : data(t), next(NULL) {}				// 转换构造函数
+    explicit Node(const T &t) : data(t), next(NULL) {}				// 转换构造函数
     Node(const Node &node) : data(node.data), next(NULL) {}	// 拷贝构造函数
     Node<T> & operator=(const Node<T> &node)				// 重载赋值运算符函数
     {
@@ -28,7 +28,7 @@ private:
 template <typename T> class LinkList			// 单向链表类模板设计
 {
 public:
-    LinkList(int n=0, const T *array=NULL);		// 构造函数（含默认的构造函数、转换构造函数等）
+    explicit LinkList(int n=0, const T *array=NULL);		// 构造函数（含默认的构造函数、转换构造函数等）
     LinkList(const LinkList &list);				// (深)拷贝构造函数
     ~LinkList();								// 析构函数
     LinkList & operator=(const LinkList &list);	// (深)赋值运算符函数
@@ -68,7 +68,68 @@ private:
 /********************************************************************
  * 类模板成员函数操作描述（应该编写在头文件中）！请在此完成成员函数 *
  ********************************************************************/
+template <typename T>
+LinkList<T>::LinkList(int n, const T *array)
+{
+    num=n;
+    Node<T> temp(*array);
+    *head=temp;
+    *cur_node=temp;
+    for(int i=1;i<n;i++)
+    {
+        array++;
+        temp=*array;
+        cur_node->next=*temp;
+        *cur_node=temp;
+    }
+}
 
+template <typename T>
+LinkList<T>::LinkList(const LinkList<T> &list)
+{
+    Node<T> *p;
+    while(head!=NULL)
+    {
+        p = head;								// 暂时保存原链首结点地址，以便释放
+        head = head->next;						// 原首结点脱链，原首结点的下一个结点成为链首结点
+        delete p;								// 这里用到了隐含假设：假设所有结点都是动态结点
+    }
+    cur_node = NULL;
+    num = 0;
+    num=list.num;
+    *head=list.head;
+    *cur_node=list.cur_node;
+}
+template <typename T>
+LinkList<T>::~LinkList()
+{
+    Node<T> *p;
+    while(head!=NULL)
+    {
+        p = head;								// 暂时保存原链首结点地址，以便释放
+        head = head->next;						// 原首结点脱链，原首结点的下一个结点成为链首结点
+        delete p;								// 这里用到了隐含假设：假设所有结点都是动态结点
+    }
+    cur_node = NULL;
+    num = 0;
+}
+template <typename T>
+LinkList<T>& LinkList<T>::operator=(const LinkList &list)
+{
+    Node<T> *p;//先释放原有资源
+    while(head!=NULL)
+    {
+        p = head;								// 暂时保存原链首结点地址，以便释放
+        head = head->next;						// 原首结点脱链，原首结点的下一个结点成为链首结点
+        delete p;								// 这里用到了隐含假设：假设所有结点都是动态结点
+    }
+    cur_node = NULL;
+    num = 0;
+    num=list.num;
+    *head=list.head;
+    *cur_node=list.cur_node;
+    return *this;
+}
 
 
 
