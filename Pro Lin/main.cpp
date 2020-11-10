@@ -55,14 +55,16 @@ int main()
             cin >> id;
             if(list.Locate_name(name,true)!=NULL&&list.Locate_id(id,true)!=NULL){
                 cout<<"Already have this book"<<endl;
-                continue;
             }
-            Book new_book(name,id);
-            list.Append(new_book);
-            cout << "bibliography " + name + " Has been stored, the id of the book is: " << id;
+            else
+            {
+                Book new_book(name,id);
+                list.Append(new_book);
+                cout << "bibliography " + name + " Has been stored, the id of the book is: " << id<<endl;
+            }
         }
         else if(choose=='2'){
-            cout << "Enter 1 book name to borrow the book, enter 2id to borrow the book" << endl;
+            cout << "Enter 1 book name to borrow the book, enter 2 id to borrow the book" << endl;
             cin>>choose;
             if (choose=='1'){
                 cout << "Please enter the title: " << endl;
