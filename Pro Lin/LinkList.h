@@ -61,8 +61,10 @@ public:
 
 	Node<T> *GoTop(), *Go(int n), *GoBottom();	// µ±Ç°½áµã¾ø¶Ô¶¨Î»£ºÊ×½áµã¡¢µÚn¸ö½áµã(n´Ó0Æğ)¡¢Î²½áµã
 	Node<T> *Skip(int n=1)  throw(int);			// µ±Ç°½áµãÏà¶Ô¶¨Î»£¨n¿ÉÎª¸ºÊı£©£¬Ä¬ÈÏnÎª1±íÊ¾ÏÂÒ»¸ö½áµã
-	template <typename TYPE> Node<T> *Locate(const TYPE &x, bool newsearch=false); // µ±Ç°½áµãÒÀÌõ¼ş£¨¸ø¶¨TYPEÀàĞÍ£©¶¨Î»
+    template <typename TYPE> Node<T> *Locate(const TYPE &x, bool newsearch=false); // µ±Ç°½áµãÒÀÌõ¼ş£¨¸ø¶¨TYPEÀàĞÍ£©¶¨Î»
+	template <typename TYPE> Node<T> *Locate_name(const TYPE &x, bool newsearch=false); 
     template <typename TYPE> Node<T> *Locate_id(const TYPE &x, bool newsearch=false);
+    template <typename TYPE> string Locate_id2(const TYPE &x, bool newsearch=false);
 	template <typename TYPE> void Sort(const TYPE &x, bool ascending=true);	// ¸ù¾İTYPEÀàĞÍÅÅĞò£¨ÉıĞò»ò½µĞò£©
 	void Reverse();								// Á´±í½áµãµ¹ÖÃ
     bool Duplicate_name(string name);
@@ -400,6 +402,24 @@ Node<T> *LinkList<T>::Skip(int n) throw(int)	// µ±Ç°½áµãÏà¶Ô¶¨Î»£¨n¿ÉÎª¸ºÊı£©£¬Ä
 template <typename T> template <typename TYPE>
 Node<T> *LinkList<T>::Locate(const TYPE &x, bool newsearch) // µ±Ç°½áµãÒÀÌõ¼ş£¨¸ø¶¨TYPEÀàĞÍ£©¶¨Î»
 {
+    static Node<T> *p=head;
+    static TYPE data = x;
+    if(newsearch)
+    {
+        p = head;
+        data = x;
+    }
+     for(; p!=NULL && TYPE(p->data)!=TYPE(data); p=p->next)    // forÑ­»·µÄ±í´ïÊ½1Îª¿Õ£º´ÓÁ´±íµÄ"µ±Ç°"½áµãÆğ¼ÌĞø²éÕÒ
+         ;                                                    // TYPE()ÎªÀàĞÍÇ¿ÖÆ×ª»»ÔËËã·û
+    cur_node = p;
+    if(p!=NULL)        // Èç¹ûÕÒµ½£¬ÔÚ·µ»ØÕÒµ½µÄ½áµãµØÖ·£¨cur_node£©Ö®Ç°£¬p"ÇÄÇÄ"µØÏòÇ°×ßÒ»²½£¬Îª¼ÌĞø²éÕÒ×öºÃ×¼±¸
+        p = p->next;
+    return cur_node; //return the address of cur_node,so *Locate will show the data of cur_node.
+}
+
+template <typename T> template <typename TYPE>
+Node<T> *LinkList<T>::Locate_name(const TYPE &x, bool newsearch) // µ±Ç°½áµãÒÀÌõ¼ş£¨¸ø¶¨TYPEÀàĞÍ£©¶¨Î»
+{
 	static Node<T> *p=head;
 	static TYPE data = x;
 	if(newsearch)
@@ -407,7 +427,7 @@ Node<T> *LinkList<T>::Locate(const TYPE &x, bool newsearch) // µ±Ç°½áµãÒÀÌõ¼ş£¨¸
 		p = head;
 		data = x;
 	}
-    for(; p!=NULL && p->data.name==data; p=p->next)	// forÑ­»·µÄ±í´ïÊ½1Îª¿Õ£º´ÓÁ´±íµÄ"µ±Ç°"½áµãÆğ¼ÌĞø²éÕÒ
+    for(; p!=NULL && p->data.name!=data; p=p->next)	// forÑ­»·µÄ±í´ïÊ½1Îª¿Õ£º´ÓÁ´±íµÄ"µ±Ç°"½áµãÆğ¼ÌĞø²éÕÒ
 	 	;													// TYPE()ÎªÀàĞÍÇ¿ÖÆ×ª»»ÔËËã·û
 	cur_node = p;
 	if(p!=NULL)		// Èç¹ûÕÒµ½£¬ÔÚ·µ»ØÕÒµ½µÄ½áµãµØÖ·£¨cur_node£©Ö®Ç°£¬p"ÇÄÇÄ"µØÏòÇ°×ßÒ»²½£¬Îª¼ÌĞø²éÕÒ×öºÃ×¼±¸
@@ -424,12 +444,29 @@ Node<T> *LinkList<T>::Locate_id(const TYPE &x, bool newsearch) // µ±Ç°½áµãÒÀÌõ¼ş
         p = head;
         data = x;
     }
-    for(; p!=NULL && p->data.ID==x; p=p->next)    // forÑ­»·µÄ±í´ïÊ½1Îª¿Õ£º´ÓÁ´±íµÄ"µ±Ç°"½áµãÆğ¼ÌĞø²éÕÒ
+    for(; p!=NULL && p->data.ID!=x; p=p->next)    // forÑ­»·µÄ±í´ïÊ½1Îª¿Õ£º´ÓÁ´±íµÄ"µ±Ç°"½áµãÆğ¼ÌĞø²éÕÒ
          ;                                                    // TYPE()ÎªÀàĞÍÇ¿ÖÆ×ª»»ÔËËã·û
     cur_node = p;
     if(p!=NULL)        // Èç¹ûÕÒµ½£¬ÔÚ·µ»ØÕÒµ½µÄ½áµãµØÖ·£¨cur_node£©Ö®Ç°£¬p"ÇÄÇÄ"µØÏòÇ°×ßÒ»²½£¬Îª¼ÌĞø²éÕÒ×öºÃ×¼±¸
         p = p->next;
     return cur_node; //return the address of cur_node,so *Locate will show the data of cur_node.
+}
+template <typename T> template <typename TYPE>
+string LinkList<T>::Locate_id2(const TYPE &x, bool newsearch) // µ±Ç°½áµãÒÀÌõ¼ş£¨¸ø¶¨TYPEÀàĞÍ£©¶¨Î»
+{
+    static Node<T> *p=head;
+    static TYPE data = x;
+    if(newsearch)
+    {
+        p = head;
+        data = x;
+    }
+    for(; p!=NULL && p->data.ID!=x; p=p->next)    // forÑ­»·µÄ±í´ïÊ½1Îª¿Õ£º´ÓÁ´±íµÄ"µ±Ç°"½áµãÆğ¼ÌĞø²éÕÒ
+         ;                                                    // TYPE()ÎªÀàĞÍÇ¿ÖÆ×ª»»ÔËËã·û
+    cur_node = p;
+    if(p!=NULL)        // Èç¹ûÕÒµ½£¬ÔÚ·µ»ØÕÒµ½µÄ½áµãµØÖ·£¨cur_node£©Ö®Ç°£¬p"ÇÄÇÄ"µØÏòÇ°×ßÒ»²½£¬Îª¼ÌĞø²éÕÒ×öºÃ×¼±¸
+        p = p->next;
+    return cur_node->data.name; //return the address of cur_node,so *Locate will show the data of cur_node.
 }
 
 template <typename T> template <typename TYPE>

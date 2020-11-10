@@ -40,7 +40,7 @@ int main()
     {
         cout<<"List of books:"<<endl;
         list.ShowList();
-        cout<<"What do you need? (1 add book. 2 borrow book. 3 book title check id. 4id check book title. 5 errata.)"<<endl;
+        cout<<"What do you need? (1.add book 2.borrow book 3.book title check id 4.id check book title 5.errata)"<<endl;
         cin>>choose;
         if(choose=='0')
         {
@@ -53,7 +53,7 @@ int main()
             cin >> name;
             cout << "Please enter the book number: " << endl;
             cin >> id;
-            if(list.Locate(name,true)==NULL&&list.Locate_id(id,true)==NULL){
+            if(list.Locate_name(name,true)!=NULL&&list.Locate_id(id,true)!=NULL){
                 cout<<"Already have this book"<<endl;
                 continue;
             }
@@ -94,7 +94,10 @@ int main()
         else if (choose=='4'){
             cout<<"Please enter id"<<endl;
             cin>>id;
-            cout << "This book is titled: " + list.FindName(id)<<endl;
+            if(list.Locate_id(id,true)!=NULL)
+                cout << "This book is titled: "<<list.Locate_id2(id,true)<<endl;
+            else
+                cout<<"There is no book corresponding to id!"<<endl;
         }
         else if (choose=='5'){
             cout <<"What type of errata? 1id Errata 2 Title Errata"<<endl;
