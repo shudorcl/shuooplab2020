@@ -44,7 +44,7 @@ int main()
         list.ShowList();
         cout<<"What do you need? (1 add book. 2 borrow book. 3 book title check id. 4id check book title. 5 errata.)"<<endl;
         getline(cin,choose);
-        if(choose[0]=='\0')
+        if(choose[0]=='\n')
         {
             cout<<"See you next time!\n"
                 <<"=================\n"<<endl;
@@ -61,7 +61,7 @@ int main()
             }
             Book new_book(name,id);
             list.Append(new_book);
-            cout << "bibliography " + name + " Has been stored, the id of the book is: " << id << endl;
+            cout << "bibliography " + name + " Has been stored, the id of the book is: " << id;
         }
         else if(choose[0]=='2'){
             cout << "Enter 1 book name to borrow the book, enter 2id to borrow the book" << endl;
