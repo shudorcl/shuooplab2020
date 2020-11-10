@@ -69,7 +69,7 @@ int main()
             if (choose=='1'){
                 cout << "Please enter the title: " << endl;
                 cin >> name;
-                if(not list.Duplicate_name(name)){
+                if(list.Locate_name(name,true)==NULL){
                     cout<<"No such book found."<<endl;
                     continue;
                 }
@@ -78,7 +78,7 @@ int main()
             else if (choose=='2'){
                 cout << "Please enter id:" << endl;
                 cin >> id;
-                if(not list.Duplicate_id(id)){
+                if(list.Locate_id(id,true)==NULL){
                     cout<<"No such book found."<<endl;
                     continue;
                 }
@@ -102,7 +102,7 @@ int main()
                 cout<<"There is no book corresponding to id!"<<endl;
         }
         else if (choose=='5'){
-            cout <<"What type of errata? 1id Errata 2 Title Errata"<<endl;
+            cout <<"What type of errata? 1 id Errata 2 Title Errata"<<endl;
             cin >> choose;
             if (choose=='1'){
                 cout << "Please enter the book title and original id: "<<endl;
