@@ -35,14 +35,19 @@ int main()
     char choose;
     int id, correct_id;
     cout<<"=================\n"
-        <<"Welcome to the library management system, press Enter to exit\n"<<endl;
+        <<"Welcome to the library management system, press 0 to exit\n"<<endl;
     while (1)
     {
         cout<<"List of books:"<<endl;
         list.ShowList();
         cout<<"What do you need? (1 add book. 2 borrow book. 3 book title check id. 4id check book title. 5 errata.)"<<endl;
-        if(choose=='\0')
+        cin>>choose;
+        if(choose=='0')
         {
+            cout<<"See you next time!\n"
+                <<"=================\n"<<endl;
+            break;
+        }
         else if(choose=='1') {
             cout << "Please enter the book name: " << endl;
             cin >> name;
